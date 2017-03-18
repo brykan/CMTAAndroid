@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">CMTA</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_project">Add Project</string>
+    <string name="add_issue">Add Issue</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="project_name">Project Name</string>
+    <string name="project_number">Project #</string>
+    <string name="project_location">Project Location</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

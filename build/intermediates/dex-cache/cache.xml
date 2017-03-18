@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.1.0_8799bee9b449a505e9eb214a00eb718f3672b909/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d38084015027549951cbaea5d5f6fb795cc81151">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.1.0_e267e5dbf215ff896aa3b285a0284fe9ab534c03/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/design/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="30103d98fa5ed824b54af839c85e2111f9bde8ec">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.1.0_712c4eaf1fe54a74de85c3cc9a3e424d573535cf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.1.0_fab326e5e3456b39d13d96e81935358fc3dc3170/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.1.0_c1ee5a61fb3a18b2e523423f1d79e969d7dc5a18/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.1.0_d1a69a656beac2b6db7f134d3ca324b4a99d2713/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.1.0_415df11e2918af8473f484a8fd33ba51edcfe66a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.1.0_d53984ded3091be54b298aa1a0985cbd0b7960a7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.1.0_2000f463a4484fbc99597f01ff65209d77d8d628/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.0/support-annotations-25.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.1.0_ef96ea7d09f81d20f8031ec7f921119462b66cb7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.1.0_76987935871dde7aba161758e9469b95fd3fc274/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.1.0_a8c409b0e068a6232596d02f76a4fd8dae25215c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.1.0_19f4431639164860ca5476da3888952240dc4c84/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="4506f26755bb66085b158928a311b6e39efb27e8">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_09fab2992c33c9730cdd9e098359c1d63571f600/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c02bf692e661d15cb0be8b950dd0b7fad8b59873">
+        <dex dex="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_375f893deaefb5f488be421bbed0869f877152ff/classes.dex" />
+    </item>
+
+</items>

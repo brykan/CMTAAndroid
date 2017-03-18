@@ -1,0 +1,7 @@
+#Mon Mar 06 22:24:29 PST 2017
+base.0=/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_09fab2992c33c9730cdd9e098359c1d63571f600
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_375f893deaefb5f488be421bbed0869f877152ff/classes.dex
+base.1=/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_375f893deaefb5f488be421bbed0869f877152ff
+file.0=/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_09fab2992c33c9730cdd9e098359c1d63571f600/classes.dex
