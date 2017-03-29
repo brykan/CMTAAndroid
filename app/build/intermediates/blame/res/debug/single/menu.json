@@ -1,10 +1,14 @@
 [
     {
-        "merged": "/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/res/merged/debug/menu/menu_main.xml",
-        "source": "/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/src/main/res/menu/menu_main.xml"
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_main.xml",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\menu\\menu_main.xml"
     },
     {
-        "merged": "/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/res/merged/debug/menu/menu_project.xml",
-        "source": "/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/src/main/res/menu/menu_project.xml"
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_report.xml",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\menu\\menu_report.xml"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_project.xml",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\menu\\menu_project.xml"
     }
 ]

@@ -17,6 +17,8 @@ import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,16 +31,18 @@ import java.io.ByteArrayOutputStream;
 
 import static android.app.Activity.RESULT_OK;
 
-public class IssueFragment extends DialogFragment {
+public class IssueFragment extends DialogFragment implements View.OnClickListener, OnItemSelectedListener  {
 
     private static final String TAG = "IssueDetails";
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_CAPTURE = 1888;
 
     private EditText editIssueLocation;
     private EditText editIssueDetails;
     private Spinner editIssueStatus;
     private ImageButton camButton;
     private BitmapDrawable bdrawable;
+    public String spinnerItem;
+
 
     private Boolean wantToCloseDialog;
     private byte[] imageData;
@@ -70,10 +74,12 @@ public class IssueFragment extends DialogFragment {
         editIssueDetails = (EditText) dialogView.findViewById(R.id.issueDetails);
         editIssueLocation = (EditText) dialogView.findViewById(R.id.issueLocation);
         editIssueStatus = (Spinner)dialogView.findViewById(R.id.spinner);
-        String[] items = new String[]{"open", "closed"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, items);
+        editIssueStatus.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.status ,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         editIssueStatus.setAdapter(adapter);
-
+        camButton = (ImageButton) dialogView.findViewById(R.id.imageButton);
+        camButton.setOnClickListener(this);
         return createIssueAlert.create();
     }
 
@@ -98,6 +104,17 @@ public class IssueFragment extends DialogFragment {
             });
         }
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        spinnerItem = parent.getItemAtPosition(position).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
     public  interface OnCompleteListener {
         void onComplete(Issue issue);
 
@@ -123,7 +140,7 @@ public class IssueFragment extends DialogFragment {
         return editIssueDetails.getText().toString();
     }
     public String getIssueStatus() {
-        return editIssueStatus.toString();
+        return spinnerItem;
     }
 
     public void createIssue() {
@@ -152,14 +169,13 @@ public class IssueFragment extends DialogFragment {
         if(view.getId() == R.id.imageButton){ //&& hasPermissionInManifest(getBaseContext(), "CAMERA")) {
             Intent camintent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (camintent.resolveActivity(getActivity().getPackageManager()) != null) {
-                getActivity().startActivityForResult(camintent, REQUEST_IMAGE_CAPTURE);
+                startActivityForResult(camintent, REQUEST_IMAGE_CAPTURE);
             }
         }
 
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        camButton = (ImageButton) getView().findViewById(R.id.imageButton);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");

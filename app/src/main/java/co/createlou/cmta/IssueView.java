@@ -1,8 +1,10 @@
 package co.createlou.cmta;
 
-import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,54 +13,115 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Bryan on 3/6/17.
  */
 
-public class ProjectView extends AppCompatActivity implements IssueFragment.OnCompleteListener {
+public class IssueView extends AppCompatActivity implements IssueFragment.OnCompleteListener {
 
     private static final String TAG = "SaveDetails";
 
     FragmentManager fm = getSupportFragmentManager();
     public ListView mListView;
-    public myIssueAdapter customAdapter;
-    public ArrayList<Issue> issueList;
-    public Project project;
-    public ArrayList<Project> projectList = new ArrayList<>();
+    public ArrayList<Issue> issueList = new ArrayList<>();
+    public Report myReport;
+    public String reportKey;
     public IssueFragment issueFragment;
-    ApplicationData applicationData = ((ApplicationData)getApplication());
-    private int position;
+    public int position;
+    FirebaseListAdapter mAdapter;
+    ArrayList<String> imageKeys = new ArrayList<>();
+    final long THREE_MEGABYTES = 1024*1024*3;
+    DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference().child("reports");
+    DatabaseReference issueRef = FirebaseDatabase.getInstance().getReference().child("issues").child(reportKey);
+    public byte[] imageData;
+    public BitmapDrawable bdrawable;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.project_view);
+        setContentView(R.layout.activity_issue_view);
+        //pulling issue data if need be
+        issueRef.orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot != null && dataSnapshot.getValue() != null) {
+
+                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
+                        //Pulling the project keys and creating a hashmap of the project data
+                        String key = snap.getKey();
+                        HashMap<String,String> issueMap = (HashMap<String,String>) snap.getValue();
+                        //converting the hashmap data into a project object
+                        String issueLocation = issueMap.get("issueLocation");
+                        String issueStatus = issueMap.get("issueStatus");
+                        String issueDetails = issueMap.get("issueDetails");
+                        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+                        StorageReference pathReference = storageRef.child("images/"+key);
+                        storageRef.getBytes(THREE_MEGABYTES).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                imageData = bytes;
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                            }
+                        });
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+                        bdrawable = new BitmapDrawable(getResources(),bitmap);
+                        Issue saveIssue = new Issue(issueLocation,issueStatus,issueDetails,imageData,bdrawable);
+                        //utilizing the project objects and key data
+                        issueList.add(saveIssue);
+                        imageKeys.add(key);
+                        Log.d("MAIN", key);
+                        Log.d("MAIN","issue added with details "+issueLocation + " " + issueStatus + " "+issueDetails);
+                    }
+                }
+            }
+            public void onCancelled (DatabaseError firebaseError){
+                //doing nothing for now // TODO: 3/27/2017 Add Error Handling
+            }
+        });
+        //Setting up the Toolbar
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        // Get recipe data passed from previous activity
+        setTitle("Issues");
+        // Get report data passed from previous activity
         position = this.getIntent().getExtras().getInt("position");
-        project = this.getIntent().getExtras().getParcelable("project_parcel");
-        projectList = applicationData.getProjectList();
-        // Set title on action bar of this activity
-        setTitle(String.valueOf(project.getAmountofissues()));
+        myReport = this.getIntent().getExtras().getParcelable("report_parcel");
+        reportKey = this.getIntent().getExtras().getString("key");
+        //Setting up listView and firebaseadapter
+        mAdapter = new FirebaseListAdapter<Issue>(this, Issue.class, R.layout.issuelistrow, issueRef) {
+            @Override
+            protected void populateView(View view, Issue issue, int position) {
+                ((TextView)view.findViewById(R.id.issueLocation)).setText(issue.getIssueLocation());
+                ((TextView)view.findViewById(R.id.issueDetails)).setText(issue.getIssueDetails());
+                ((TextView)view.findViewById(R.id.issueStatus)).setText(issue.getIssueStatus());
+                (view.findViewById(R.id.issueImage)).setBackground(issue.getIssueImage());
+            }
+        };
         mListView = (ListView) findViewById(R.id.issueList);
-        issueList = project.issues;
-        customAdapter = new myIssueAdapter(this, 1, issueList);
-        mListView.setAdapter(customAdapter);
+        mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -77,7 +140,7 @@ public class ProjectView extends AppCompatActivity implements IssueFragment.OnCo
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_project, menu);
+        getMenuInflater().inflate(R.menu.menu_report, menu);
         return true;
     }
 
@@ -101,10 +164,11 @@ public class ProjectView extends AppCompatActivity implements IssueFragment.OnCo
     }
 
     public void onComplete(Issue newIssue) {
-        project.addIssue(newIssue);
-        projectList.set(position, project);
-        applicationData.setProjectList(projectList);
-        customAdapter.notifyDataSetChanged();
+        issueList.add(newIssue);
+        String issueKey = issueRef.push().getKey();
+        issueRef.child(issueKey).setValue(newIssue);
+
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override

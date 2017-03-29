@@ -5,55 +5,53 @@ package co.createlou.cmta;
  */
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
-import static android.app.Activity.RESULT_OK;
 
-public class IssueFragment extends DialogFragment implements View.OnClickListener, OnItemSelectedListener  {
+public class ReportFragment extends DialogFragment implements OnItemSelectedListener {
 
-    private static final String TAG = "IssueDetails";
-    private static final int REQUEST_IMAGE_CAPTURE = 1888;
+    private static final String TAG = "ReportDetails";
 
-    private EditText editIssueLocation;
-    private EditText editIssueDetails;
-    private Spinner editIssueStatus;
-    private ImageButton camButton;
-    private BitmapDrawable bdrawable;
-    public String spinnerItem;
-
+    private EditText editPreparedBy;
+    private Spinner editReportPunchListType;
+    private EditText editSiteVisitDate;
+    private String spinnerItem;
     private Boolean wantToCloseDialog;
-    private byte[] imageData;
+    private String project;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder createIssueAlert = new AlertDialog.Builder(getActivity());
-        createIssueAlert.setTitle("Create Issue");
+        AlertDialog.Builder createReportAlert = new AlertDialog.Builder(getActivity());
+        createReportAlert.setTitle("Create Report");
         wantToCloseDialog = false;
+        Bundle args = getArguments();
+        project = args.getString("project_name");
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.fragment_issue, null);
+        View dialogView = inflater.inflate(R.layout.fragment_report, null);
         //setting the fragment alert view to the view initialized and inflated above
-        createIssueAlert.setView(dialogView)
+        createReportAlert.setView(dialogView)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener()
                 {
                     @Override
@@ -69,17 +67,24 @@ public class IssueFragment extends DialogFragment implements View.OnClickListene
                         dismiss();
                     }
                 });
-        //Initializing the EditTexts from above to casts of the cooresponding views in the fragment
-        editIssueDetails = (EditText) dialogView.findViewById(R.id.issueDetails);
-        editIssueLocation = (EditText) dialogView.findViewById(R.id.issueLocation);
-        editIssueStatus = (Spinner)dialogView.findViewById(R.id.spinner);
-        editIssueStatus.setOnItemSelectedListener(this);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.status ,android.R.layout.simple_spinner_item);
+        //Initializing the Items from above to casts of the cooresponding views in the fragment
+        editPreparedBy = (EditText) dialogView.findViewById(R.id.editPreparedBy);
+        editReportPunchListType = (Spinner) dialogView.findViewById(R.id.spinner);
+        editSiteVisitDate = (EditText) dialogView.findViewById(R.id.editSiteVisitDate);
+        editReportPunchListType.setOnItemSelectedListener(this);
+        editSiteVisitDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.punchListType ,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        editIssueStatus.setAdapter(adapter);
-        camButton = (ImageButton) dialogView.findViewById(R.id.imageButton);
-        camButton.setOnClickListener(this);
-        return createIssueAlert.create();
+        editReportPunchListType.setAdapter(adapter);
+        return createReportAlert.create();
     }
 
     @Override
@@ -103,7 +108,29 @@ public class IssueFragment extends DialogFragment implements View.OnClickListene
             });
         }
     }
+    Calendar myCalendar = Calendar.getInstance();
 
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateLabel();
+        }
+
+    };
+
+    private void updateLabel() {
+
+        String myFormat = "LLL dd, yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        editSiteVisitDate.setText(sdf.format(myCalendar.getTime()));
+    }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         spinnerItem = parent.getItemAtPosition(position).toString();
@@ -115,7 +142,7 @@ public class IssueFragment extends DialogFragment implements View.OnClickListene
     }
 
     public  interface OnCompleteListener {
-        void onComplete(Issue issue);
+        void onComplete(Report report);
 
     }
     private OnCompleteListener mListener;
@@ -132,37 +159,40 @@ public class IssueFragment extends DialogFragment implements View.OnClickListene
     }
 
     //Getter methods for issue name, number, and location
-    public String getIssueLocation() {
-        return editIssueLocation.getText().toString();
+    public String getPreparedBy() {
+        return editPreparedBy.getText().toString();
     }
-    public String getIssueDetails() {
-        return editIssueDetails.getText().toString();
-    }
-    public String getIssueStatus() {
+    public String getPunchListType() {
         return spinnerItem;
+    }
+    public String getSiteVisitDate() {
+        return editSiteVisitDate.getText().toString();
     }
 
     public void createIssue() {
 
-        final String issueLocation = getIssueLocation();
-        final String issueDetails = getIssueDetails();
-        final String issueStatus = getIssueStatus();
+        final String prepBy = getPreparedBy();
+        final String punchType = getPunchListType();
+        final String visitDate = getSiteVisitDate();
 
 
-        if (TextUtils.isEmpty(issueLocation)) {
-            Toast.makeText(getActivity(), "Please enter a Issue Location", Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(prepBy)) {
+            Toast.makeText(getActivity(), "Please enter Who Prepared Item", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(issueDetails)) {
-            Toast.makeText(getActivity(), "Please enter Issue Details", Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(punchType)) {
+            Toast.makeText(getActivity(), "Please enter PunchList Type", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (TextUtils.isEmpty(visitDate)) {
+            Toast.makeText(getActivity(), "Please enter Site Visit Date", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Report report = new Report(issueLocation, issueDetails, issueStatus, imageData, bdrawable);
-        Log.d(TAG, "Issue Added with details " + issue.issueLocation +", " + issue.issueDetails +", " + issue.issueStatus);
+        Report report = new Report(prepBy, project, punchType,visitDate);
+        Log.d(TAG, "Report Added to project " +report.getProject()+  " with details " + report.getPreparedBy() +", " + report.getPunchListType() +", " + report.getSiteVisitDate());
         wantToCloseDialog = true;
-        this.mListener.onComplete(issue);
+        this.mListener.onComplete(report);
 
-    }
     }
 }

@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/design_ic_visibility.xml",
-        "source": "/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/drawable-anydpi-v21/design_ic_visibility.xml"
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility_off.xml",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\25fe1578a37d54406d4b1260f55add006b8212e7\\output\\res\\drawable-anydpi-v21\\design_ic_visibility_off.xml"
     },
     {
-        "merged": "/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/res/merged/debug/drawable-anydpi-v21/design_ic_visibility_off.xml",
-        "source": "/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/intermediates/exploded-aar/com.android.support/design/25.1.0/res/drawable-anydpi-v21/design_ic_visibility_off.xml"
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility.xml",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\25fe1578a37d54406d4b1260f55add006b8212e7\\output\\res\\drawable-anydpi-v21\\design_ic_visibility.xml"
     }
 ]

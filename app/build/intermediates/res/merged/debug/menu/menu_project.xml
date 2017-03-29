@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="co.createlou.cmta.MainActivity">
     <item
-        android:id="@+id/add_issue"
+        android:id="@+id/add_report"
         android:orderInCategory="100"
-        android:title="@string/add_issue"
+        android:title="ADD REPORT"
         app:showAsAction="always"/>
 </menu>

@@ -25,8 +25,6 @@ public class myProjectAdapter extends BaseAdapter {
 
     private static class ViewHolder {
         private TextView projectName;
-        private TextView projectNumber;
-        private TextView projectLocation;
     }
     public myProjectAdapter(Context context, ArrayList<Project> items) {
         mContext = context;
@@ -52,9 +50,6 @@ public class myProjectAdapter extends BaseAdapter {
 
             viewHolder = new ViewHolder();
             viewHolder.projectName = (TextView) convertView.findViewById(R.id.projectName);
-            viewHolder.projectNumber = (TextView) convertView.findViewById(R.id.projectNumber);
-            viewHolder.projectLocation = (TextView) convertView.findViewById(R.id.projectLocation);
-
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -63,9 +58,7 @@ public class myProjectAdapter extends BaseAdapter {
         Project item = (Project) getItem(position);
         if (item!= null) {
 
-            viewHolder.projectName.setText(mDataSource.get(position).projectName);
-            viewHolder.projectNumber.setText(mDataSource.get(position).projectNumber);
-            viewHolder.projectLocation.setText(mDataSource.get(position).projectLocation);
+            viewHolder.projectName.setText(mDataSource.get(position).getProjectName());
         }
 
         return convertView;

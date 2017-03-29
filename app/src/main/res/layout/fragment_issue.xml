@@ -9,26 +9,26 @@
     <!-- TODO: Update blank fragment layout -->
 
     <EditText
+        android:id="@+id/issueLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Issue Location"
-        android:ems="10"
-        android:id="@+id/issueLocation"
         android:layout_weight="1"
-        android:textAlignment="gravity"
-        android:gravity="top" />
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Issue Location"
+        android:inputType="textPersonName"
+        android:textAlignment="gravity" />
 
     <EditText
+        android:id="@+id/issueDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Issue Details"
-        android:ems="10"
-        android:id="@+id/issueDetails"
         android:layout_weight="1"
-        android:textAlignment="gravity"
-        android:gravity="top" />
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Issue Details"
+        android:inputType="textPersonName"
+        android:textAlignment="gravity" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -45,21 +45,21 @@
             android:layout_gravity="center_vertical" />
 
         <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/spinner"
-            android:layout_weight="3"
-            android:layout_gravity="center_vertical" />
+            android:layout_width="107dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center_vertical"
+            android:visibility="visible" />
     </LinearLayout>
 
     <ImageButton
+        android:id="@+id/imageButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="?attr/selectableItemBackground"
-        android:id="@+id/imageButton"
-        android:layout_weight="5"
-        android:padding="80dp"
         android:layout_margin="50dp"
-        android:onClick="onClick (issueFragment)" />
+        android:layout_weight="5"
+        android:onClick="onClick"
+        android:padding="80dp"
+        app:srcCompat="?attr/selectableItemBackground" />
 
 </LinearLayout>

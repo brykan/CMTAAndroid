@@ -1,42 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content" android:orientation="vertical"
-    android:layout_width="fill_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <TableRow android:layout_width="fill_parent"
-        android:id="@+id/TableRow01"
-        android:layout_height="wrap_content">
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TextView android:textColor="#FFFFFF"
+        <TextView
             android:id="@+id/projectName"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Project Name" android:textStyle="bold"
-            android:gravity="left"
             android:layout_weight="1"
-            android:typeface="monospace"
-            android:height="40sp" />
-    </TableRow>
+            android:height="35dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="Project Name"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
 
-    <TableRow android:layout_height="wrap_content"
-        android:layout_width="fill_parent">
-
-        <TextView android:textColor="#FFFFFF"
-            android:id="@+id/projectNumber"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Project Number"
-            android:layout_weight="1"
-            android:height="20sp" />
-
-        <TextView android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:layout_weight="1"
-            android:textColor="#FFFFFF"
-            android:gravity="right"
-            android:id="@+id/projectLocation"
-            android:text="Project Location"
-            android:height="20sp" />
     </TableRow>
 
 </TableLayout>

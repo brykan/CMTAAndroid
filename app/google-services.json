@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "299753343176-93hrrqgp02hi0886dek8qo6g811t45m0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "co.createlou.cmta",
+            "certificate_hash": "07cfb06973349b446f239d1a8ae621118992eef1"
+          }
+        },
+        {
           "client_id": "299753343176-73bfni352mn6nhm6bjp8l8rf68456jo3.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299753343176-60bsro6s1380msv3p9k12emhmg6drtlh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.createsomething.CMTAFirebase"
+              }
+            },
+            {
+              "client_id": "299753343176-73bfni352mn6nhm6bjp8l8rf68456jo3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

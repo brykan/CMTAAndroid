@@ -1,37 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <instant-run
     abi="arm64-v8a,armeabi-v7a,armeabi"
-    api-level="23"
+    api-level="24"
+    build-mode="COLD"
     density="xxxhdpi"
-    format="8"
-    plugin-version="2.2.3"
-    timestamp="13788249027392"
-    token="-8158423150126515613"
-    verifier="FULL_BUILD_REQUESTED" >
+    format="10"
+    plugin-version="2.3.0"
+    timestamp="1490509517974"
+    token="5020291563936281393"
+    verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="695" />
+        duration="2081" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="109" />
+        duration="108" />
     <task
         name="verifier"
-        duration="1" />
+        duration="46" />
 
     <artifact
-        location="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/outputs/apk/app-debug.apk"
-        type="MAIN" />
+        location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+        type="SPLIT" />
 
     <build
-        timestamp="13788249027392"
+        build-mode="FULL"
+        timestamp="1490507960543"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="/Users/Bryan/Desktop/RaiseREDAndroid/CMTA/app/build/outputs/apk/app-debug.apk"
-            type="MAIN" />
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
+            type="SPLIT" />
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\outputs\apk\app-debug.apk"
+            type="SPLIT_MAIN" />
+    </build>
+    <build
+        build-mode="COLD"
+        timestamp="1490509517974"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
+            type="SPLIT" />
     </build>
 
 </instant-run>

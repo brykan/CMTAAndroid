@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.view.View;
 import android.widget.Toast;
 
-public class AlertDFragment extends DialogFragment {
+public class ProjectFragment extends DialogFragment {
 
     private static final String TAG = "ProjectDetails";
 
