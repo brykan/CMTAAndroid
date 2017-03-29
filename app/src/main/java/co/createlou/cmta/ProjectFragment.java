@@ -129,7 +129,7 @@ public class AlertDFragment extends DialogFragment {
             return;
         }
         Project project = new Project(projname, projnum, projloc);
-        Log.d(TAG, "Project Added with details " + project.projectName +", " + project.projectNumber +", " + project.projectLocation);
+        Log.d(TAG, "Project Added with details " + project.getProjectName() +", " + project.getProjectNumber() +", " + project.getProjectLocation());
         wantToCloseDialog = true;
         this.mListener.onComplete(project);
 

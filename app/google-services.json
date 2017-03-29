@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "299753343176",
+    "firebase_url": "https://cmta-8ecda.firebaseio.com",
+    "project_id": "cmta-8ecda",
+    "storage_bucket": "cmta-8ecda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299753343176:android:8979fa5f45a11f30",
+        "android_client_info": {
+          "package_name": "co.createlou.cmta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299753343176-73bfni352mn6nhm6bjp8l8rf68456jo3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg7C7KCLpCivRdfjyCliV8w6IOrmq4XAw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
