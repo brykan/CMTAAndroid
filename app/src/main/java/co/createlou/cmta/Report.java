@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Bryan on 3/23/2017.
@@ -14,11 +15,19 @@ public class Report extends ArrayList<Issue> implements Parcelable {
     private String project;
     private String punchListType;
     private String siteVisitDate;
+    private List<String> notes;
 
     public Report(){
         this.preparedBy = "GenericUser";
         this.project = "GenericProject";
         this.punchListType = "GenericReason";
+    }
+    public Report(String preparedBy, String project, String punchListType, String siteVisitDate,List<String> notes){
+        this.preparedBy = preparedBy;
+        this.project = project;
+        this.punchListType = punchListType;
+        this.siteVisitDate = siteVisitDate;
+        this.notes = notes;
     }
     public Report(String preparedBy, String project, String punchListType, String siteVisitDate){
         this.preparedBy = preparedBy;
@@ -50,6 +59,13 @@ public class Report extends ArrayList<Issue> implements Parcelable {
     }
     public void setSiteVisitDate(String siteVisitDate) {
         this.siteVisitDate = siteVisitDate;
+    }
+    public List<String> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<String> notes) {
+        this.notes = notes;
     }
 
     protected Report(Parcel in) {

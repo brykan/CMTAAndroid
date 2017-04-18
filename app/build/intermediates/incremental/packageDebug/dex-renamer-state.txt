@@ -1,4 +1,4 @@
-#Sun Mar 26 00:09:53 EDT 2017
+#Tue Apr 18 01:36:38 EDT 2017
 base.0=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_76c673b30dc2b13cfd3d9cc4659712c453dff0c5
 renamed.1=classes.dex
 renamed.0=classes2.dex

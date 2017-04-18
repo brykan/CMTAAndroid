@@ -1,5 +1,6 @@
 package co.createlou.cmta;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -18,23 +19,25 @@ public class Issue implements Parcelable {
     public String issueLocation;
     public byte[] imagedata;
     public BitmapDrawable bitmapDrawable;
+    public Bitmap bmap;
+    public String report;
 
     public Issue() {
-        this.issueLocation = "Issue Location";
-        this.issueStatus = "Issue Status";
-        this.issueDetails = "Details";
     }
-    public Issue(String location, String status, String details) {
-        this.issueStatus = status;
-        this.issueDetails = details;
-        this.issueLocation = location;
-    }
-    public Issue(String location, String status, String details, byte[] data, BitmapDrawable bitmapDrawable) {
+//    public Issue(String details, String location, String report, String status) {
+//        this.issueStatus = status;
+//        this.issueDetails = details;
+//        this.issueLocation = location;
+//        this.report = report;
+//    }
+    public Issue(String location, String status, String details, String report, byte[] data, BitmapDrawable bitmapDrawable, Bitmap bmap) {
         this.issueStatus = status;
         this.issueDetails = details;
         this.imagedata = data;
+        this.report = report;
         this.issueLocation = location;
         this.bitmapDrawable = bitmapDrawable;
+        this.bmap = bmap;
     }
 
 
@@ -54,7 +57,7 @@ public class Issue implements Parcelable {
         this.issueDetails = issueDetails;
     }
 
-    public String getIssueLocation() {
+    public String getIssueLocation()     {
         return issueLocation;
     }
 
@@ -73,6 +76,17 @@ public class Issue implements Parcelable {
         return bitmapDrawable;
     }
 
+    public Bitmap getBmap() {
+        return bmap;
+    }
+
+    public void setBitmapDrawable(BitmapDrawable bitmapDrawable) {
+        this.bitmapDrawable = bitmapDrawable;
+    }
+
+    public void setBmap(Bitmap bmap) {
+        this.bmap = bmap;
+    }
 
     //Parcelization of object
     public Issue(Parcel in){

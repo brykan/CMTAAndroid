@@ -1,4 +1,4 @@
-#Sun Mar 26 00:09:52 EDT 2017
+#Wed Mar 29 19:00:53 EDT 2017
 file.9=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\glide-3.7.0_d50ab31823df8774778b96991e053c95bc7d3632\\classes.dex
 base.10=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_249241287f36b53fd1905abb1a5cdc345d85f668
 file.8=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\classes_4a4c6c12c234ef470f0089d05f60ba6f2917798c\\classes.dex

@@ -6,20 +6,16 @@ package co.createlou.cmta;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.view.View;
@@ -27,11 +23,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 
-public class ReportFragment extends DialogFragment implements OnItemSelectedListener {
+public class ReportFragment extends Fragment implements OnItemSelectedListener {
 
     private static final String TAG = "ReportDetails";
 
@@ -39,38 +36,24 @@ public class ReportFragment extends DialogFragment implements OnItemSelectedList
     private Spinner editReportPunchListType;
     private EditText editSiteVisitDate;
     private String spinnerItem;
-    private Boolean wantToCloseDialog;
-    private String project;
+    public String project;
+    OnReportDataPass dataPasser;
+
+    public ReportFragment(){
+
+    }
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder createReportAlert = new AlertDialog.Builder(getActivity());
-        createReportAlert.setTitle("Create Report");
-        wantToCloseDialog = false;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         Bundle args = getArguments();
+        Log.d(TAG, "onCreateView: FUCKINGFUCK");
+
         project = args.getString("project_name");
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.fragment_report, null);
-        //setting the fragment alert view to the view initialized and inflated above
-        createReportAlert.setView(dialogView)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        //Do nothing here because we override this button later to change the close behaviour.
-                        //However, we still need this because on older versions of Android unless we
-                        //pass a handler the button doesn't get instantiated
-                    }
-                })
-                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,	int which) {
-                        dismiss();
-                    }
-                });
+        View view = inflater.inflate(R.layout.fragment_report, container,false);
         //Initializing the Items from above to casts of the cooresponding views in the fragment
-        editPreparedBy = (EditText) dialogView.findViewById(R.id.editPreparedBy);
-        editReportPunchListType = (Spinner) dialogView.findViewById(R.id.spinner);
-        editSiteVisitDate = (EditText) dialogView.findViewById(R.id.editSiteVisitDate);
+        editPreparedBy = (EditText) view.findViewById(R.id.editPreparedBy);
+        editReportPunchListType = (Spinner) view.findViewById(R.id.spinner);
+        editSiteVisitDate = (EditText) view.findViewById(R.id.editSiteVisitDate);
         editReportPunchListType.setOnItemSelectedListener(this);
         editSiteVisitDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,30 +67,10 @@ public class ReportFragment extends DialogFragment implements OnItemSelectedList
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.punchListType ,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         editReportPunchListType.setAdapter(adapter);
-        return createReportAlert.create();
+        onAttachToParentFragment(getParentFragment());
+        return view;
     }
 
-    @Override
-    public void onStart()
-    {
-        super.onStart();    //super.onStart() is where dialog.show() is actually called on the underlying dialog, so we have to do it after this point
-        final AlertDialog d = (AlertDialog)getDialog();
-        if(d != null)
-        {
-            Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
-            positiveButton.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    createIssue();
-                    if(wantToCloseDialog)
-                        d.dismiss();
-                    //else dialog stays open. Make sure you have an obvious way to close the dialog especially if you set cancellable to false.
-                }
-            });
-        }
-    }
     Calendar myCalendar = Calendar.getInstance();
 
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -130,6 +93,7 @@ public class ReportFragment extends DialogFragment implements OnItemSelectedList
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         editSiteVisitDate.setText(sdf.format(myCalendar.getTime()));
+
     }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -141,20 +105,19 @@ public class ReportFragment extends DialogFragment implements OnItemSelectedList
 
     }
 
-    public  interface OnCompleteListener {
-        void onComplete(Report report);
-
-    }
-    private OnCompleteListener mListener;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+
+    }
+    public void onAttachToParentFragment(Fragment fragment)
+    {
         try {
-            this.mListener = (OnCompleteListener)context;
+            dataPasser = (OnReportDataPass) fragment;
         }
         catch (final ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement OnCompleteListener");
+            throw new ClassCastException(fragment.toString() + " must implement onReportDataPass");
         }
     }
 
@@ -169,7 +132,7 @@ public class ReportFragment extends DialogFragment implements OnItemSelectedList
         return editSiteVisitDate.getText().toString();
     }
 
-    public void createIssue() {
+    public void dataPassTrigger() {
 
         final String prepBy = getPreparedBy();
         final String punchType = getPunchListType();
@@ -189,10 +152,16 @@ public class ReportFragment extends DialogFragment implements OnItemSelectedList
             return;
         }
 
-        Report report = new Report(prepBy, project, punchType,visitDate);
-        Log.d(TAG, "Report Added to project " +report.getProject()+  " with details " + report.getPreparedBy() +", " + report.getPunchListType() +", " + report.getSiteVisitDate());
-        wantToCloseDialog = true;
-        this.mListener.onComplete(report);
-
+        ArrayList<String> data = new ArrayList<>();
+        data.add(prepBy);
+        data.add(punchType);
+        data.add(visitDate);
+        passData(data);
+    }
+    public interface OnReportDataPass {
+        public void onReportDataPass(ArrayList<String> data);
+    }
+    public void passData(ArrayList<String> data) {
+        dataPasser.onReportDataPass(data);
     }
 }

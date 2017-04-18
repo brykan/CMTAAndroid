@@ -4,7 +4,6 @@ package co.createlou.cmta;
  * Created by Bryan on 1/5/17.
  */
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -26,16 +25,17 @@ public class ProjectFragment extends DialogFragment {
     private EditText editProjectName;
     private EditText editProjectNumber;
     private EditText editProjectLocation;
+    private String deviceID;
     private Boolean wantToCloseDialog;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder createProjectAlert = new AlertDialog.Builder(getActivity());
+        final AlertDialog.Builder createProjectAlert = new AlertDialog.Builder(getActivity());
 
         createProjectAlert.setTitle("Create Project");
         wantToCloseDialog = false;
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.fragment_main, null);
+        View dialogView = inflater.inflate(R.layout.fragment_project, null);
         //setting the fragment alert view to the view initialized and inflated above
         createProjectAlert.setView(dialogView)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener()
@@ -53,11 +53,12 @@ public class ProjectFragment extends DialogFragment {
                         dismiss();
                     }
                 });
+
         //Initializing the EditTexts from above to casts of the cooresponding views in the fragment
         editProjectName = (EditText) dialogView.findViewById(R.id.editProjectName);
         editProjectNumber = (EditText) dialogView.findViewById(R.id.editProjectNumber);
         editProjectLocation = (EditText) dialogView.findViewById(R.id.editProjectLocation);
-
+        deviceID = getArguments().getString("deviceID");
         return createProjectAlert.create();
     }
 
@@ -128,8 +129,8 @@ public class ProjectFragment extends DialogFragment {
             Toast.makeText(getActivity(), "Please enter a Project Location", Toast.LENGTH_LONG).show();
             return;
         }
-        Project project = new Project(projname, projnum, projloc);
-        Log.d(TAG, "Project Added with details " + project.getProjectName() +", " + project.getProjectNumber() +", " + project.getProjectLocation());
+        Project project = new Project(projname, projnum, projloc,deviceID);
+        Log.d(TAG, "Project Added to user " +deviceID+ " with details " + project.getProjectName() +", " + project.getProjectNumber() +", " + project.getProjectLocation());
         wantToCloseDialog = true;
         this.mListener.onComplete(project);
 

@@ -15,16 +15,19 @@ public class Project extends ArrayList<Report> implements Serializable,Parcelabl
     private String projectName;
     private String projectNumber;
     private String projectLocation;
+    private String deviceID;
     public Project() {
 
     }
 
 
 
-    public Project(String projectName, String projectNumber, String projectLocation) {
+
+    public Project(String projectName, String projectNumber, String projectLocation, String userKey) {
         this.projectName = projectName;
         this.projectNumber = projectNumber;
         this.projectLocation = projectLocation;
+        this.deviceID = userKey;
 
     }
     public String getProjectName() {
@@ -45,7 +48,9 @@ public class Project extends ArrayList<Report> implements Serializable,Parcelabl
     public void setProjectLocation(String projectLocation) {
         this.projectLocation = projectLocation;
     }
-
+    public String getUserKey() {
+        return deviceID;
+    }
 
     protected Project(Parcel in) {
         projectName = in.readString();

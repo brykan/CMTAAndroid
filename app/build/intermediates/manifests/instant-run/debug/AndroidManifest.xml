@@ -10,6 +10,9 @@
 
     <uses-feature android:name="android.hardware.camera" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <meta-data
         android:name="android.support.VERSION"
         android:value="25.3.0" /> <!-- Required permission for App measurement to run. -->
@@ -25,13 +28,14 @@
     <uses-permission android:name="co.createlou.cmta.permission.C2D_MESSAGE" />
 
     <application
+        android:name="co.createlou.cmta.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar" >
         <activity
-            android:name="co.createlou.cmta.MainActivity"
+            android:name="co.createlou.cmta.ProjectView"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>

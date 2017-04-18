@@ -41,7 +41,10 @@ public class IssueFragment extends DialogFragment implements View.OnClickListene
     private Spinner editIssueStatus;
     private ImageButton camButton;
     private BitmapDrawable bdrawable;
+    private Bitmap bmap;
     public String spinnerItem;
+    public String report;
+    public boolean okayToDismiss = false;
 
 
     private Boolean wantToCloseDialog;
@@ -50,6 +53,8 @@ public class IssueFragment extends DialogFragment implements View.OnClickListene
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder createIssueAlert = new AlertDialog.Builder(getActivity());
         createIssueAlert.setTitle("Create Issue");
+        Bundle args = getArguments();
+        report = args.getString("report_name");
         wantToCloseDialog = false;
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.fragment_issue, null);
@@ -158,9 +163,12 @@ public class IssueFragment extends DialogFragment implements View.OnClickListene
             Toast.makeText(getActivity(), "Please enter Issue Details", Toast.LENGTH_LONG).show();
             return;
         }
-
-        Issue issue = new Issue(issueLocation, issueDetails, issueStatus, imageData, bdrawable);
-        Log.d(TAG, "Issue Added with details " + issue.issueLocation +", " + issue.issueDetails +", " + issue.issueStatus);
+        if(!okayToDismiss){
+            Toast.makeText(getActivity(), "Please add issue image", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Issue issue = new Issue(issueLocation, issueStatus, issueDetails,report, imageData, bdrawable,bmap);
+        Log.d(TAG, "Issue Added with details " + issue.issueLocation +", " + issue.issueStatus +", " + issue.issueDetails);
         wantToCloseDialog = true;
         this.mListener.onComplete(issue);
 
@@ -178,10 +186,11 @@ public class IssueFragment extends DialogFragment implements View.OnClickListene
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            bdrawable = new BitmapDrawable(getResources(),imageBitmap);
+            bmap = (Bitmap) extras.get("data");
+            bdrawable = new BitmapDrawable(getResources(),bmap);
             camButton.setBackground(bdrawable);
-            encodeBitmap(imageBitmap);
+            encodeBitmap(bmap);
+            okayToDismiss = true;
         }
     }
     public void encodeBitmap(Bitmap bitmap) {

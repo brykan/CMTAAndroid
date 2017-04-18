@@ -18,10 +18,9 @@
             android:paddingLeft="5dp"
             android:paddingTop="5dp"
             android:text="Project Name"
+            android:textAppearance="?android:textAppearanceLarge"
             android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:typeface="monospace" />
+            android:textSize="20sp" />
 
     </TableRow>
 
