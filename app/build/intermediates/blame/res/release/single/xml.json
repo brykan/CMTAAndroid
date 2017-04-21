@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\xml\\config.xml",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\xml\\config.xml"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\xml\\provider_paths.xml",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\xml\\provider_paths.xml"
+    }
+]

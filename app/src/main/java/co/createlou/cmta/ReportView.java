@@ -41,13 +41,13 @@ import java.util.List;
  * Created by Bryan on 3/6/17.
  */
 
-public class ReportView extends AppCompatActivity implements ReportPager.OnCompleteListener, EditReportPager.OnCompleteListener,ReportFragment.OnReportDataPass,NotesFragment.OnNotesDataPass,EditReportFragment.OnReportEditDataPass,EditNotesFragment.OnNotesEditDataPass {
+public class ReportView extends AppCompatActivity implements ReportFragment.OnCompleteListener, EditReportFragment.OnCompleteListener {
 
     FragmentManager fm = getSupportFragmentManager();
     public ListView mListView;
     public Project myProject;
     public ArrayList<Report> reportList = new ArrayList<>();
-    public ReportPager reportPagerFragment;
+    public ReportFragment reportFragment;
     final Context context = this;
     private String projectKey;
     FirebaseListAdapter mAdapter;
@@ -174,15 +174,10 @@ public class ReportView extends AppCompatActivity implements ReportPager.OnCompl
                                 }
                             }
                             String project = reportMap.get("project");
-                            Log.d("bullshit", "onDataChange: "+project);
                             String prep = reportMap.get("preparedBy");
-                            Log.d("bullshit", "onDataChange: "+prep);
-
                             String punchType = reportMap.get("punchListType");
-                            Log.d("bullshit", "onDataChange: "+punchType);
 
                             String visitDate = reportMap.get("siteVisitDate");
-                            Log.d("bullshit", "onDataChange: "+visitDate);
 
                             Report testReport = new Report(prep,project,punchType,visitDate);
 
@@ -238,21 +233,15 @@ public class ReportView extends AppCompatActivity implements ReportPager.OnCompl
                         String project = reportMap.get("project");
                         Log.d("bullshit", "onDataChange: "+project);
                         String prep = reportMap.get("preparedBy");
-                        Log.d("bullshit", "onDataChange: "+prep);
-
                         String punchType = reportMap.get("punchListType");
-                        Log.d("bullshit", "onDataChange: "+punchType);
-
                         String visitDate = reportMap.get("siteVisitDate");
-                        Log.d("bullshit", "onDataChange: "+visitDate);
-
                         Report testReport = new Report(prep,project,punchType,visitDate);
 
                         Bundle args = new Bundle();
                         args.putParcelable("report_parcel",testReport);
                         args.putString("key",majorKey);
                         args.putInt("position",testPosition);
-                        EditReportPager editFragment = new EditReportPager();
+                        EditReportFragment editFragment = new EditReportFragment();
                         editFragment.setArguments(args);
                         editFragment.show(fm, "Android Dialog");
                         Log.d("MAIN", "onDataChange: launched dialog now");
@@ -287,10 +276,10 @@ public class ReportView extends AppCompatActivity implements ReportPager.OnCompl
         if (id == R.id.add_report) {
             Bundle args = new Bundle();
             args.putString("project_name",projectKey);
-            reportPagerFragment = new ReportPager();
-            reportPagerFragment.setArguments(args);
+            reportFragment = new ReportFragment();
+            reportFragment.setArguments(args);
             // Show Alert DialogFragment
-            reportPagerFragment.show(fm, "Android Dialog");
+            reportFragment.show(fm, "Android Dialog");
 
             return true;
         }
@@ -325,6 +314,9 @@ public class ReportView extends AppCompatActivity implements ReportPager.OnCompl
         mAdapter.notifyDataSetChanged();
         reportList.set(position,editReport);
     }
+
+
+
     public void onDelete(int position){
 
         final String TAG = "DELETION";
@@ -404,23 +396,4 @@ public class ReportView extends AppCompatActivity implements ReportPager.OnCompl
         }
     }
 
-    @Override
-    public void onNotesDataPass(List<String> data) {
-
-    }
-
-    @Override
-    public void onReportDataPass(ArrayList<String> data) {
-
-    }
-
-    @Override
-    public void onNotesEditDataPass(List<String> data) {
-
-    }
-
-    @Override
-    public void onReportEditDataPass(ArrayList<String> data) {
-
-    }
 }

@@ -12,11 +12,12 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <meta-data
         android:name="android.support.VERSION"
-        android:value="25.3.0" /> <!-- Required permission for App measurement to run. -->
-    <uses-permission android:name="android.permission.INTERNET" />
+        android:value="25.3.0" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -30,19 +31,25 @@
     <application
         android:name="co.createlou.cmta.MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar" >
         <activity
-            android:name="co.createlou.cmta.ProjectView"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:name="co.createlou.cmta.SplashActivity"
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="co.createlou.cmta.ProjectView"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name="co.createlou.cmta.IssueView" />
         <activity android:name="co.createlou.cmta.ReportView" />

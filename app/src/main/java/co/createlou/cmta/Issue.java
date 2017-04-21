@@ -5,73 +5,74 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-import java.net.URI;
-import java.util.ArrayList;
-
 /**
  * Created by Bryan on 3/6/17.
  */
 
 public class Issue implements Parcelable {
-    public String issueStatus;
-    public String issueDetails;
-    public String issueLocation;
-    public byte[] imagedata;
+    public String status;
+    public String details;
+    public String location;
+    public String image;
+    public byte[] data;
     public BitmapDrawable bitmapDrawable;
     public Bitmap bmap;
     public String report;
 
     public Issue() {
     }
-//    public Issue(String details, String location, String report, String status) {
-//        this.issueStatus = status;
-//        this.issueDetails = details;
-//        this.issueLocation = location;
-//        this.report = report;
-//    }
-    public Issue(String location, String status, String details, String report, byte[] data, BitmapDrawable bitmapDrawable, Bitmap bmap) {
-        this.issueStatus = status;
-        this.issueDetails = details;
-        this.imagedata = data;
+    public Issue(String location, String image, String status, String details, String report) {
+        this.status = status;
+        this.details = details;
         this.report = report;
-        this.issueLocation = location;
+        this.location = location;
+        this.image=image;
+
+    }
+    public Issue(String location, String status, String details, String report, byte[] data,String image, BitmapDrawable bitmapDrawable, Bitmap bmap) {
+        this.status = status;
+        this.details = details;
+        this.data = data;
+        this.report = report;
+        this.location = location;
         this.bitmapDrawable = bitmapDrawable;
         this.bmap = bmap;
+        this.image = image;
     }
 
 
-    public String getIssueStatus() {
-        return issueStatus;
+    public String getStatus() {
+        return status;
     }
 
-    public void setIssueStatus(String issueStatus) {
-        this.issueStatus = issueStatus;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getIssueDetails() {
-        return issueDetails;
+    public String getDetails() {
+        return details;
     }
 
-    public void setIssueDetails(String issueDetails) {
-        this.issueDetails = issueDetails;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
-    public String getIssueLocation()     {
-        return issueLocation;
+    public String getLocation()     {
+        return location;
     }
 
-    public void setIssueLocation(String issueLocation) {
-        this.issueLocation = issueLocation;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public byte[] getData() {
-        return imagedata;
+        return data;
     }
 
     public void setData(byte[] data) {
-        this.imagedata = data;
+        this.data = data;
     }
+
     public BitmapDrawable getIssueImage(){
         return bitmapDrawable;
     }
@@ -93,9 +94,9 @@ public class Issue implements Parcelable {
         String[] data = new String[3];
         in.readStringArray(data);
         // the order needs to be the same as in writeToParcel() method
-        this.issueDetails = data[0];
-        this.issueLocation = data[1];
-        this.issueStatus= data[2];
+        this.details = data[0];
+        this.location = data[1];
+        this.status = data[2];
     }
     @Override
     public int describeContents() {
@@ -103,9 +104,9 @@ public class Issue implements Parcelable {
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStringArray(new String[] {this.issueDetails,
-                this.issueLocation,
-                this.issueStatus});
+        dest.writeStringArray(new String[] {this.details,
+                this.location,
+                this.status});
     }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Issue createFromParcel(Parcel in) {

@@ -4,6 +4,10 @@
         "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_add_black_24dp.xml"
     },
     {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\ic_add_white_24dp.xml",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_add_white_24dp.xml"
+    },
+    {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21\\design_ic_visibility_off.xml",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\25fe1578a37d54406d4b1260f55add006b8212e7\\output\\res\\drawable-anydpi-v21\\design_ic_visibility_off.xml"
     },

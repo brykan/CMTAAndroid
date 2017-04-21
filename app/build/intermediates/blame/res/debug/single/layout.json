@@ -8,12 +8,12 @@
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
-        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
-        "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout\\abc_activity_chooser_view.xml"
-    },
-    {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout\\abc_activity_chooser_view.xml"
     },
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
@@ -22,6 +22,10 @@
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\25fe1578a37d54406d4b1260f55add006b8212e7\\output\\res\\layout\\design_layout_snackbar.xml"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_edit_note.xml",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\layout\\fragment_edit_note.xml"
     },
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
@@ -50,10 +54,6 @@
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout\\abc_alert_dialog_material.xml"
-    },
-    {
-        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_edit_report_pager.xml",
-        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\layout\\fragment_edit_report_pager.xml"
     },
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
@@ -156,10 +156,6 @@
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\25fe1578a37d54406d4b1260f55add006b8212e7\\output\\res\\layout\\design_navigation_item.xml"
     },
     {
-        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_edit_notes.xml",
-        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\layout\\fragment_edit_notes.xml"
-    },
-    {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\25fe1578a37d54406d4b1260f55add006b8212e7\\output\\res\\layout\\design_menu_item_action_area.xml"
     },
@@ -222,10 +218,6 @@
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout\\abc_screen_simple.xml"
-    },
-    {
-        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_report_pager.xml",
-        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\layout\\fragment_report_pager.xml"
     },
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_text_input_password_icon.xml",

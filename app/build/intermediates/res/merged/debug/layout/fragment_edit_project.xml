@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="5dp">
 
     <EditText
         android:id="@+id/editProjectName1"
@@ -57,11 +58,12 @@
         android:layout_above="@+id/editProjectName1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginBottom="13dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
         android:text="Edit Project"
-        android:textAppearance="?android:textAppearanceLarge" />
+        android:textAppearance="@android:style/TextAppearance.Material.DialogWindowTitle"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>

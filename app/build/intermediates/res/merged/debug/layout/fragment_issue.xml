@@ -12,7 +12,7 @@
         android:id="@+id/issueLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".1"
         android:ems="10"
         android:gravity="top"
         android:hint="Issue Location"
@@ -23,7 +23,7 @@
         android:id="@+id/issueDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight=".2"
         android:ems="10"
         android:gravity="top"
         android:hint="Issue Details"
@@ -31,22 +31,22 @@
         android:textAlignment="gravity" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight=".1"
+        android:orientation="horizontal">
 
         <TextView
-            android:text="Issue Status"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical" />
+            android:text="Issue Status" />
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="107dp"
+            android:layout_width="150dp"
             android:layout_height="46dp"
             android:layout_gravity="center_vertical"
             android:visibility="visible" />
@@ -54,15 +54,17 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:layout_weight="5"
         android:adjustViewBounds="true"
-
+        android:cropToPadding="false"
         android:onClick="onClick"
-        android:padding="80dp"
-        app:srcCompat="?attr/selectableItemBackground"
-        android:scaleType="fitXY"/>
+        android:scaleType="centerCrop"
+        app:srcCompat="?attr/selectableItemBackground" />
 
 </LinearLayout>

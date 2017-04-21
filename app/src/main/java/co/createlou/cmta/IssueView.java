@@ -9,9 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,8 +21,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,25 +42,23 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Bryan on 3/6/17.
  */
 
-public class IssueView extends AppCompatActivity implements IssueFragment.OnCompleteListener,EditIssueFragment.OnCompleteListener {
+public class IssueView extends AppCompatActivity implements IssueFragment.OnCompleteListener,EditIssueFragment.OnCompleteListener,ReportRequest.OnCompleteListener {
 
     private static final String TAG = "IssueView";
 
@@ -68,7 +76,7 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
     public Report myReport;
     public int position;
     FirebaseListAdapter mAdapter;
-
+    private FloatingActionButton fab;
 
     //Database References
     DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference().child("reports");
@@ -86,7 +94,11 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
     public BitmapDrawable bdrawable;
     static final String appDirectoryName = "Issue_Images";
     static final String imageRoot = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString()+"/"+appDirectoryName;
-
+    public void encodeBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,25,baos);
+        imageData = baos.toByteArray();
+    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issue_view);
@@ -110,21 +122,21 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
                         final String issueStatus = issueMap.get("status");
                         final String issueDetails = issueMap.get("details");
                         final String saveKey = issueMap.get("report");
+                        imageData = getImage(key);
                         File imgFile = new File(imageRoot, key + ".png");
-
+                        Log.d(TAG, "onDataChange: "+imageData.length);
                         if (imgFile.exists()) {
-                            try {
-                                imageData = fullyReadFileToBytes(imgFile);
-                            }catch (IOException e){
-                                e.printStackTrace();
-                            }
+//                            BitmapFactory.Options options = new BitmapFactory.Options();
+//                            options.inSampleSize = 4;
                             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
+//                            encodeBitmap(myBitmap);
+//                            final int THUMBSIZE = 256;
+//                            Bitmap thumbImage = ThumbnailUtils.extractThumbnail(myBitmap,THUMBSIZE,THUMBSIZE);
                             bdrawable = new BitmapDrawable(getResources(), myBitmap);
-                            Issue saveIssue = new Issue(issueLocation, issueStatus, issueDetails, saveKey, imageData, bdrawable, myBitmap);
+                            Issue saveIssue = new Issue(issueLocation, issueStatus, issueDetails, saveKey, imageData,imageData.toString(), bdrawable, myBitmap);
+                            Log.d(TAG, "onDataChange: "+saveIssue.toString());
                             //utilizing the project objects and key data
                             issueList.add(saveIssue);
-
                         }
                         imageKeys.add(key);
                         Log.d("MAIN", key);
@@ -147,14 +159,41 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
         position = this.getIntent().getExtras().getInt("position");
         myReport = this.getIntent().getExtras().getParcelable("report_parcel");
         //Setting up listView and firebaseadapter
+        final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                openRequest();
+
+            }
+        });
         mAdapter = new FirebaseListAdapter<Issue>(this, Issue.class, R.layout.issuelistrow, issueQuery) {
             @Override
             protected void populateView(View view, Issue issue, int position) {
-                ((TextView)view.findViewById(R.id.issueLocation)).setText(issueList.get(position).getIssueLocation());
-                ((TextView)view.findViewById(R.id.issueDetails)).setText(issueList.get(position).getIssueDetails());
-                ((TextView)view.findViewById(R.id.issueStatus)).setText(issueList.get(position).getIssueStatus());
-                ((ImageView)view.findViewById(R.id.issueImage)).setBackground(issueList.get(position).getIssueImage());
+                ((TextView)view.findViewById(R.id.issueLocation)).setText(issue.getLocation());
+                ((TextView)view.findViewById(R.id.issueDetails)).setText(issue.getDetails());
+                ((TextView)view.findViewById(R.id.issueStatus)).setText(issue.getStatus());
+                 Glide.with(getBaseContext()).load(getImage(mAdapter.getRef(position).getKey())).fitCenter().into((ImageView)view.findViewById(R.id.issueImage));
+                }
+            public byte[] getImage(String key){
+                File file = new File(imageRoot, key + ".png");
+                int size = (int) file.length();
+                byte[] bytes = new byte[size];
+                try{
+                    BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+                    buf.read(bytes,0,bytes.length);
+                    buf.close();
+                }catch(FileNotFoundException e){
+                    e.printStackTrace();
+                }catch(IOException e){
+                  e.printStackTrace();
+                }
+                return bytes;
             }
+
         };
         mListView = (ListView) findViewById(R.id.issueList);
         mListView.setAdapter(mAdapter);
@@ -166,8 +205,8 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
                 Bundle args = new Bundle();
                 args.putParcelable("issue_parcel",selectedIssue);
                 args.putInt("position",position);
-                args.putByteArray("imagedata",selectedIssue.getData());
-                args.putString("key",issueKeys.get(position));
+                args.putByteArray("image",selectedIssue.getData());
+                args.putString("key",mAdapter.getRef(position).getKey());
                 EditIssueFragment editFragment = new EditIssueFragment();
                 editFragment.setArguments(args);
                 editFragment.show(fm, "Android Dialog");
@@ -177,6 +216,15 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
 
     }
 
+    public void openRequest(){
+        Bundle args = new Bundle();
+        args.putString("key", reportAutoID);
+        ReportRequest request = new ReportRequest();
+        request.setArguments(args);
+
+        // Show Alert DialogFragment
+        request.show(fm, "Android Dialog");
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -211,27 +259,30 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
         issueList.add(newIssue);
         String issueAutoID = issueRef.push().getKey();
         issueKeys.add(issueAutoID);
-        issueRef.child(issueAutoID).child("details").setValue(newIssue.getIssueDetails());
-        issueRef.child(issueAutoID).child("location").setValue(newIssue.getIssueLocation());
-        issueRef.child(issueAutoID).child("status").setValue(newIssue.getIssueStatus());
+        issueRef.child(issueAutoID).child("details").setValue(newIssue.getDetails());
+        issueRef.child(issueAutoID).child("location").setValue(newIssue.getLocation());
+        issueRef.child(issueAutoID).child("status").setValue(newIssue.getStatus());
         issueRef.child(issueAutoID).child("report").setValue(reportAutoID);
-        issueRef.child(issueAutoID).child("image").setValue(newIssue.getData());
+        issueRef.child(issueAutoID).child("image").setValue(Base64.encodeToString(newIssue.getData(),Base64.NO_WRAP));
         final Bitmap newImage = newIssue.getBmap();
         write(newImage,issueAutoID,newIssue);
         mAdapter.notifyDataSetChanged();
     }
     public void onEdit(Issue editIssue, int position){
         DatabaseReference itemRef = mAdapter.getRef(position);
-        itemRef.child("status").setValue(editIssue.getIssueStatus());
-        itemRef.child("location").setValue(editIssue.getIssueLocation());
-        itemRef.child("details").setValue(editIssue.getIssueDetails());
+        itemRef.child("status").setValue(editIssue.getStatus());
+        itemRef.child("location").setValue(editIssue.getLocation());
+        itemRef.child("details").setValue(editIssue.getDetails());
         write(editIssue.getBmap(),itemRef.getKey(),editIssue);
         mAdapter.notifyDataSetChanged();
         issueList.set(position,editIssue);
     }
     public void onDelete(int position){
         final String TAG = "DELETION";
+        issueKeys.remove(position);
+        issueList.remove(position);
         DatabaseReference itemRef = mAdapter.getRef(position);
+        Log.d(TAG, "onDelete: "+position);
         String deleteKey = itemRef.getKey();
         StorageReference deleteRef = storage.getReference().child("images/" + deleteKey);
         deleteRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -256,6 +307,10 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
                         Log.d("DELETION", deleteKey);
         itemRef.removeValue();
         mAdapter.notifyDataSetChanged();
+        /*Intent intent = getIntent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
+        startActivity(intent);*/
 
     }
 
@@ -274,7 +329,7 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
 
         try {
             out = new FileOutputStream(dest);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, out); // bmp is your Bitmap instance
+            bmp.compress(Bitmap.CompressFormat.JPEG, 25, out); // bmp is your Bitmap instance
             // PNG is a lossless format, the compression factor (100) is ignored
         } catch (Exception e) {
             e.printStackTrace();
@@ -347,5 +402,39 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
 
         return bytes;
     }
+    public byte[] getImage(String key){
+        File file = new File(imageRoot, key + ".png");
+        int size = (int) file.length();
+        byte[] bytes = new byte[size];
+        try{
+            BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+            buf.read(bytes,0,bytes.length);
+            buf.close();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return bytes;
+    }
+    @Override
+    public void onComplete(String url) {
+        RequestQueue queue = Volley.newRequestQueue(this);
 
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        Log.d(TAG, "onResponse: "+response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
 }

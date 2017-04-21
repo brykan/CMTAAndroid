@@ -1,7 +1,4 @@
-#Tue Apr 18 01:36:38 EDT 2017
-base.0=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_76c673b30dc2b13cfd3d9cc4659712c453dff0c5
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_7d1e7842ababe4dedd339e7262eed3378e385fe0\\classes.dex
-base.1=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_7d1e7842ababe4dedd339e7262eed3378e385fe0
-file.0=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_76c673b30dc2b13cfd3d9cc4659712c453dff0c5\\classes.dex
+#Thu Apr 20 06:43:00 EDT 2017
+base.0=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+renamed.0=classes.dex
+file.0=C\:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

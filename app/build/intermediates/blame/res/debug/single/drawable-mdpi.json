@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_add_white_24dp.png",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_add_white_24dp.png"
+    },
+    {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi\\ic_add_black_24dp.png",
         "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_add_black_24dp.png"
     }

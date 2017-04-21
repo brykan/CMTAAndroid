@@ -6,8 +6,11 @@ package co.createlou.cmta;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,9 +19,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,32 +33,64 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-public class ReportFragment extends Fragment implements OnItemSelectedListener {
+public class ReportFragment extends DialogFragment implements OnItemSelectedListener,NotesFragment.OnCompleteListener {
 
     private static final String TAG = "ReportDetails";
 
+    //EditTexts and Spinner
     private EditText editPreparedBy;
     private Spinner editReportPunchListType;
     private EditText editSiteVisitDate;
+    private Button addNote;
+
+    //ListView Items
+    public ListView mListView;
+    final ArrayList<String> notesList = new ArrayList<>();
+    ArrayAdapter<String> mAdapter;
+
+    //Extraneous items
     private String spinnerItem;
     public String project;
-    OnReportDataPass dataPasser;
+    public boolean wantToCloseDialog;
 
+    //Date Items
+    String myFormat = "LLL dd, yyyy"; //In which you need put here
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
     public ReportFragment(){
 
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        Bundle args = getArguments();
-        Log.d(TAG, "onCreateView: FUCKINGFUCK");
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final AlertDialog.Builder createProjectAlert = new AlertDialog.Builder(getActivity());
 
+        createProjectAlert.setTitle("Create Report");
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        Bundle args = getArguments();
         project = args.getString("project_name");
-        View view = inflater.inflate(R.layout.fragment_report, container,false);
+        View view = inflater.inflate(R.layout.fragment_report, null);
+        wantToCloseDialog = false;
+        createProjectAlert.setView(view)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        //Do nothing here because we override this button later to change the close behaviour.
+                        //However, we still need this because on older versions of Android unless we
+                        //pass a handler the button doesn't get instantiated
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,	int which) {
+                        dismiss();
+                    }
+                });
+
         //Initializing the Items from above to casts of the cooresponding views in the fragment
         editPreparedBy = (EditText) view.findViewById(R.id.editPreparedBy);
         editReportPunchListType = (Spinner) view.findViewById(R.id.spinner);
         editSiteVisitDate = (EditText) view.findViewById(R.id.editSiteVisitDate);
+        editSiteVisitDate.setText(sdf.format(myCalendar.getTime()));
         editReportPunchListType.setOnItemSelectedListener(this);
         editSiteVisitDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +104,34 @@ public class ReportFragment extends Fragment implements OnItemSelectedListener {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.punchListType ,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         editReportPunchListType.setAdapter(adapter);
-        onAttachToParentFragment(getParentFragment());
-        return view;
+        addNote = (Button) view.findViewById(R.id.addButton);
+        addNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                NotesFragment notesFragment = new NotesFragment();
+                notesFragment.show(getChildFragmentManager(),"Android Dialog");
+
+            }
+        });
+        mAdapter= new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,notesList);
+        mListView = (ListView)view.findViewById(R.id.noteslistview);
+        mListView.setAdapter(mAdapter);
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedNote = notesList.get(position);
+                Bundle args = new Bundle();
+                args.putInt("position",position);
+                args.putString("note",selectedNote);
+                EditNoteFragment editFragment = new EditNoteFragment();
+                editFragment.setArguments(args);
+                editFragment.show(getFragmentManager(), "Android Dialog");
+                return true;
+            }
+        });
+        return createProjectAlert.create();
     }
 
     Calendar myCalendar = Calendar.getInstance();
@@ -89,9 +152,6 @@ public class ReportFragment extends Fragment implements OnItemSelectedListener {
 
     private void updateLabel() {
 
-        String myFormat = "LLL dd, yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
         editSiteVisitDate.setText(sdf.format(myCalendar.getTime()));
 
     }
@@ -105,20 +165,49 @@ public class ReportFragment extends Fragment implements OnItemSelectedListener {
 
     }
 
+    @Override
+    public void onStart()
+    {
+        super.onStart();    //super.onStart() is where dialog.show() is actually called on the underlying dialog, so we have to do it after this point
+        final AlertDialog d = (AlertDialog)getDialog();
+        if(d != null)
+        {
+            Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
+            positiveButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    createReport();
+                    if(wantToCloseDialog)
+                        d.dismiss();
+                    //else dialog stays open. Make sure you have an obvious way to close the dialog especially if you set cancellable to false.
+                }
+            });
+        }
+    }
 
+    @Override
+    public void onComplete(String note) {
+        notesList.add(note);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public  interface OnCompleteListener {
+        void onComplete(Report report);
+
+    }
+    private OnCompleteListener mListener;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
-    }
-    public void onAttachToParentFragment(Fragment fragment)
-    {
         try {
-            dataPasser = (OnReportDataPass) fragment;
+            this.mListener = (OnCompleteListener)context;
         }
         catch (final ClassCastException e) {
-            throw new ClassCastException(fragment.toString() + " must implement onReportDataPass");
+            throw new ClassCastException(context.toString() + " must implement OnCompleteListener");
         }
+
     }
 
     //Getter methods for issue name, number, and location
@@ -132,7 +221,7 @@ public class ReportFragment extends Fragment implements OnItemSelectedListener {
         return editSiteVisitDate.getText().toString();
     }
 
-    public void dataPassTrigger() {
+    public void createReport() {
 
         final String prepBy = getPreparedBy();
         final String punchType = getPunchListType();
@@ -152,16 +241,9 @@ public class ReportFragment extends Fragment implements OnItemSelectedListener {
             return;
         }
 
-        ArrayList<String> data = new ArrayList<>();
-        data.add(prepBy);
-        data.add(punchType);
-        data.add(visitDate);
-        passData(data);
+        Report newReport = new Report(prepBy,project,punchType,visitDate,notesList);
+        wantToCloseDialog = true;
+        this.mListener.onComplete(newReport);
     }
-    public interface OnReportDataPass {
-        public void onReportDataPass(ArrayList<String> data);
-    }
-    public void passData(ArrayList<String> data) {
-        dataPasser.onReportDataPass(data);
-    }
+
 }

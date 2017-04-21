@@ -2,6 +2,168 @@
 <items version="2" >
 
     <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\502ecf4423fe9b185213608bbbd89b2ff2fa4d04\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="ec3360994c4007c282a4b651723603e82682b601">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_e9f01be9f9114c458c7be2804143813b329a8151.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\9963b5216b8b66f4a568df05b1b849e6594fcdfd\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="6003d64df88a6ce5e961fa2bad7f1b9b97689ac1">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_31b5791785ea0147d760c913c75b753c5c762c14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\98d0a648f75a0a9e8179b2241bad2845056131bd\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="cf8c0b6ec17f059cf61ecd101296e16c38562196">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_e68fa133fe90eac2980c47198571ccfafe796cab.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\f59fbbc136bea3818f10f01c1e200781f1da861e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="888983f51cf34f57a93ff16832552f2f15937212">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_e782eff3a3a24ef18bb84f36bf001d4be791def8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.0\support-annotations-25.3.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="dd84903d2e1af25a6081ef9038ad863cb14ca3a0">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\support-annotations-25.3.0_7a407e8823ab49528d0f064db47bc6b898f6ada3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\d0e1d7a92b5492fc0a7f8fee56baec0315a11720\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="a3e61044038fb54cddf6b8dc79f41d2b57f42caf">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_ec57233c582526ebce22be96d45be3eef0013f0d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\c60a6ff8110a32321618eebdf4687dddb6aaee06\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="5cc5ef8347a6bafa14556cbd35230aa9b3431bb0">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_4a4c6c12c234ef470f0089d05f60ba6f2917798c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\3f484da33ffca2eebbff4087a4299d240eab2e18\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d0a843615f3b5fa3a080497709f5436696149a09">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_d10a79fd7536d9461dfab85ecb4c3c0304c77cd8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\b7ed87bde9ac53c1fc2c35615348ae6751a9a2f4\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="425c7b17887e5c3f8cbdf67ba171bc246f29b42c">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_5c952244e1985597bfb8c203abdfacf566d7ce26.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.gradle\caches\modules-2\files-2.1\com.mcxiaoke.volley\library\1.0.19\a8f23f65fc1e522ee4a1a697ee569901a46741fa\library-1.0.19.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\library-1.0.19_f3249ec2a031fdd0df23de2420c73050bd1fea8a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\e915bb8c79667e2b6e4404c8558eb2deade58108\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="93c10d68ab5ea070f15782ae6d3a28d1f1d8f45e">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_b198cde6558cc140221e62f85555ea359b7ef564.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\25fe1578a37d54406d4b1260f55add006b8212e7\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="9ab787a20aae245b5b3651ae0b9c38459eb37715">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_aca6f89f8b0dfcebd33577908fef2a2e67106a00.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\d1b5e94d4be95e0f255a93629f18d7e60ac3ce96\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="93c1199fcb0a34b980e6fff8350daff62e696ec2">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_07b17921e5ba3275c7e20058bcd31f5af8be95f1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\6c393ba794fd1442b94a5e39ca2ea73e88ed2cb0\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="2a7ffe939ffd830b5d4052f3c1c4c235923790ce">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_e2ce70488c748292c08219e18d176c70eb83e5de.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\cc5516fe925c4a3eb524e94f9a2cb7c3a34dab23\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="518768f3200963fbfec652f498da2c9d39245234">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_0332d87b1499a2eb78e980aeac1c0eae1bc9c050.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\7bd28e99eb14560ad8bfdf45ab0eabc81475904c\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f5bcd9cbfeedc58f493339841a7c5d0347a39f0b">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_ffb118602274b58e8592663e83c9e187d4b8e356.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\3ca9cb47801b6eed1e880c27714e47c34ff8caa0\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d6a04527c17597019dad82777c5094a3d60d1c33">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_ed9bcb4b8b77e00e5545acd522cf2fb6f972421d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\0562736528dad0856679ec5c35c8b43255ad0aa7\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_d1455e856679e8597cc1d728220d0e3058505b31.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
@@ -11,13 +173,103 @@
         <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_7d1e7842ababe4dedd339e7262eed3378e385fe0\classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\c94298262ac44ac47c3f363e9c49ae5879bf5f91\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="1df6d719c4e264d66bb98baa5cb637495b8cca66">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_249241287f36b53fd1905abb1a5cdc345d85f668.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="70f23cb87278f89aa51e6f57e8f0fd5266572d95">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_2ecbe6f66be816e1f5e2cece8a6e837f332613d8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\e8e8fd9a6c907a7a091021368c14e524d1fb07dd\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="0a5d5553c308643a9022f15513ebdd59e9c78d82">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_680f2cf3a15abfed51271200f3b4781b9538617c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\db4cbf39542ef13c75496075ea8641f600860631\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="8e1d31656bc9f1889283836e025e6cb703acd38a">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_f4e49060d78db31228b5fb6b1fcf2c78a530d54f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\fd1893adfdc3ca05f5676292485ec9a1c0f984d9\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="4b746ef0fd46acb5aaf3d9ab9a4cec22c28d3211">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_dc9fe6472dc1ea82596fa985557e11612524a36a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\glide-3.7.0_d50ab31823df8774778b96991e053c95bc7d3632.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\b7296656cca65f38155e7748730b58dd53088771\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="a1aa1dd9917e887bfe732cc5e561ae6ae8f9a84a">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_981fcf7e47adb3d339b138feb1c3962dbb39e830.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\6171a0cbe16d1162e7288b72d33992c05086447d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="fbb206f7a119f66ce171d95aae1225a5b209a8b7">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_e0c0a7f75b2836d23447fe8f167004470cb0407d.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="4c0508968477d12576fd52bd0c139ce46976f95a">
+        sha1="999026585afde887bb708d97f165a529dbcdea87">
         <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_76c673b30dc2b13cfd3d9cc4659712c453dff0c5\classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\dfdc810448bf27ca27b0dbc634d933c0bfea371b\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="399f75732ff1ac159f9e73611536f1508bf18d3b">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_38c2615192a68bbc4a1289ab9d46c220d538dbb6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\9b1af49779b0b5f749bc438d401e35c8c06799ad\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="bdcc2a9572f18b8c90a3a157cab6cdfc97c6c736">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_015dd78583847f547434e174ecd3c181f83c44ce.jar" />
     </item>
 
 </items>

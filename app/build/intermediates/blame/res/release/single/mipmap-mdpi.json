@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\mipmap-mdpi\\icon.png",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\mipmap-mdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\mipmap-mdpi\\ic_launcher.png",
+        "source": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    }
+]

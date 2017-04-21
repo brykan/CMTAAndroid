@@ -22,14 +22,14 @@ public class ReportRequest extends DialogFragment {
     private static final String TAG = "ProjectDetails";
 
     private EditText editFileName;
-    private EditText editEmailAddress;
+    private EditText editEmail;
     private String reportKey;
     private Boolean wantToCloseDialog;
     public String urlString;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final AlertDialog.Builder createProjectAlert = new AlertDialog.Builder(getActivity());
-        createProjectAlert.setTitle("Create Project");
+        createProjectAlert.setTitle("Export Report PDF");
         wantToCloseDialog = false;
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.fragment_report_request, null);
@@ -53,7 +53,7 @@ public class ReportRequest extends DialogFragment {
 
         //Initializing the EditTexts from above to casts of the cooresponding views in the fragment
         editFileName = (EditText) dialogView.findViewById(R.id.editFileName);
-        editEmailAddress = (EditText) dialogView.findViewById(R.id.editEmailAddress);
+        editEmail = (EditText) dialogView.findViewById(R.id.editEmailAddress);
         reportKey = getArguments().getString("key");
         return createProjectAlert.create();
     }
@@ -100,25 +100,25 @@ public class ReportRequest extends DialogFragment {
     public String getFileName() {
         return editFileName.getText().toString();
     }
-    public String getEmailAddress() {
-        return editEmailAddress.getText().toString();
+    public String getEmail() {
+        return editEmail.getText().toString();
     }
 
 
     public void emailRequest() {
 
         final String fileName = getFileName();
-        final String emailAddress = getEmailAddress();
-
+        final String email = getEmail();
         if (TextUtils.isEmpty(fileName)) {
             Toast.makeText(getActivity(), "Please enter a File Name", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(emailAddress)) {
-            Toast.makeText(getActivity(), "Please enter an Email Address", Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(getActivity(), "Please enter an E-Mail Address", Toast.LENGTH_LONG).show();
             return;
         }
-        urlString = "https://us-central1-cmta-8ecda.cloudfunctions.net/createPDF?reportKey=" + reportKey + "&fileName=" + fileName + "&email=" + emailAddress;
+
+        urlString = "https://us-central1-cmta-8ecda.cloudfunctions.net/createPDF?reportKey=" + reportKey + "&fileName=" + fileName + "&toEmail=" + email;
         wantToCloseDialog = true;
         this.mListener.onComplete(urlString);
     }

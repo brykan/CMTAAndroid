@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    }
+]
