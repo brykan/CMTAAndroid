@@ -117,7 +117,7 @@ public class ReportRequest extends DialogFragment {
             Toast.makeText(getActivity(), "Please enter an E-Mail Address", Toast.LENGTH_LONG).show();
             return;
         }
-
+        fileName.replace(" ","%20");
         urlString = "https://us-central1-cmta-8ecda.cloudfunctions.net/createPDF?reportKey=" + reportKey + "&fileName=" + fileName + "&toEmail=" + email;
         wantToCloseDialog = true;
         this.mListener.onComplete(urlString);

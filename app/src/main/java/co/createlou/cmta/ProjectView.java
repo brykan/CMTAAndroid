@@ -15,7 +15,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -43,8 +45,8 @@ public class ProjectView extends AppCompatActivity implements ProjectFragment.On
     public DatabaseReference projectRef = FirebaseDatabase.getInstance().getReference().child("projects");
     //Declaring Extras
     public ListView mListView;
-    public ArrayList<Project> projectList = new ArrayList<>();
-    public ArrayList<String> keys = new ArrayList<>();
+    private ProgressBar progressBar;
+    private LinearLayout layout;
     public String android_id;
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -64,35 +66,11 @@ public class ProjectView extends AppCompatActivity implements ProjectFragment.On
         android_id = Installation.id(this);
         Log.d("androidID", android_id);
         setContentView(R.layout.activity_project_view);
+        layout = (LinearLayout) findViewById(R.id.linearLayout);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar1);
         //Setting Firebase Child Reference
         Query childref = projectRef.orderByChild("deviceID").equalTo(android_id);
 
-        childref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot != null && dataSnapshot.getValue() != null) {
-
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        //Pulling the project keys and creating a hashmap of the project data
-                        String key = postSnapshot.getKey();
-                        HashMap<String,String> projectMap = (HashMap<String,String>) postSnapshot.getValue();
-                        //converting the hashmap data into a project object
-                        String name = projectMap.get("projectName");
-                        String num = projectMap.get("projectNumber");
-                        String loc = projectMap.get("projectLocation");
-                        Project project = new Project(name,num,loc,android_id);
-                        //utilizing the project objects and key data
-                        projectList.add(project);
-                        keys.add(key);
-                        Log.d("MAIN", key);
-                        Log.d("MAIN","project added with details "+name + " " + num+ " " + loc);
-                    }
-                }
-            }
-                public void onCancelled (DatabaseError firebaseError){
-                //doing nothing for now // TODO: 3/27/2017 Add Error Handling
-                }
-            });
         //Setting up Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -106,6 +84,7 @@ public class ProjectView extends AppCompatActivity implements ProjectFragment.On
 
             }
         };
+        progressBar.setVisibility(View.GONE);
         mListView.setAdapter(mAdapter);
         //Setting up Click and LongClick Listeners
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -148,6 +127,7 @@ public class ProjectView extends AppCompatActivity implements ProjectFragment.On
                         Intent detailIntent = new Intent(context, ReportView.class);
                         detailIntent.putExtras(args);
                         startActivity(detailIntent);
+                        finish();
                     }
                     public void onCancelled (DatabaseError firebaseError){
                         //doing nothing for now // TODO: 3/27/2017 Add Error Handling
@@ -165,7 +145,8 @@ public class ProjectView extends AppCompatActivity implements ProjectFragment.On
                 final String majorKey = mRef.getKey();
                 final int testPosition = position;
                 final HashMap<String,String> projectMap = new HashMap<String, String>();
-
+                layout.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 mRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -242,12 +223,10 @@ public class ProjectView extends AppCompatActivity implements ProjectFragment.On
     public void onComplete(Project newProject) {
         String projectKey = projectRef.child("projects").push().getKey();
         Log.d("MAIN", "Storing Project");
-        keys.add(projectKey);
         projectRef.child(projectKey).child("projectName").setValue(newProject.getProjectName());
         projectRef.child(projectKey).child("projectNumber").setValue(newProject.getProjectNumber());
         projectRef.child(projectKey).child("projectLocation").setValue(newProject.getProjectLocation());
         projectRef.child(projectKey).child("deviceID").setValue(newProject.getUserKey());
-        projectList.add(newProject);
         mAdapter.notifyDataSetChanged();
        // write();
         Bundle args = new Bundle();
@@ -256,6 +235,7 @@ public class ProjectView extends AppCompatActivity implements ProjectFragment.On
         Intent detailIntent = new Intent(context, ReportView.class);
         detailIntent.putExtras(args);
         startActivity(detailIntent);
+        finish();
     }
     public void onEdit(Project project,int position) {
         DatabaseReference itemRef = mAdapter.getRef(position);
@@ -264,7 +244,6 @@ public class ProjectView extends AppCompatActivity implements ProjectFragment.On
         itemRef.child("projectNumber").setValue(project.getProjectNumber());
         mAdapter.notifyDataSetChanged();
 
-        projectList.set(position,project);
     }
     public void onDelete(int position){
         final String TAG = "DELETION";
@@ -359,6 +338,10 @@ public class ProjectView extends AppCompatActivity implements ProjectFragment.On
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
 }

@@ -33,7 +33,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-public class ReportFragment extends DialogFragment implements OnItemSelectedListener,NotesFragment.OnCompleteListener {
+public class ReportFragment extends DialogFragment implements OnItemSelectedListener,NotesFragment.OnCompleteListener,EditNoteFragment.OnCompleteListener {
 
     private static final String TAG = "ReportDetails";
 
@@ -127,7 +127,7 @@ public class ReportFragment extends DialogFragment implements OnItemSelectedList
                 args.putString("note",selectedNote);
                 EditNoteFragment editFragment = new EditNoteFragment();
                 editFragment.setArguments(args);
-                editFragment.show(getFragmentManager(), "Android Dialog");
+                editFragment.show(getChildFragmentManager(), "Android Dialog");
                 return true;
             }
         });
@@ -190,6 +190,18 @@ public class ReportFragment extends DialogFragment implements OnItemSelectedList
     @Override
     public void onComplete(String note) {
         notesList.add(note);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onEdit(String note, int position) {
+        notesList.set(position,note);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDeleteNote(int position) {
+        notesList.remove(position);
         mAdapter.notifyDataSetChanged();
     }
 

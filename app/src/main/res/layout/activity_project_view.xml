@@ -6,11 +6,13 @@
     android:layout_width="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="co.createlou.cmta.ProjectView"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context="co.createlou.cmta.ProjectView">
+
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -25,11 +27,24 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </android.support.design.widget.AppBarLayout>
+
         <ListView
+            android:id="@+id/projectList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/projectList">
+            android:layout_height="match_parent">
 
         </ListView>
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -83,6 +83,8 @@ public class EditNoteFragment extends DialogFragment {
         final AlertDialog d = (AlertDialog)getDialog();
         if(d != null)
         {
+            d.setCanceledOnTouchOutside(false);
+
             Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(new View.OnClickListener()
             {
@@ -100,7 +102,7 @@ public class EditNoteFragment extends DialogFragment {
     }
     public  interface OnCompleteListener {
         void onEdit(String note,int position);
-        void onDelete(int position);
+        void onDeleteNote(int position);
     }
     private OnCompleteListener mListener;
 
@@ -142,7 +144,7 @@ public class EditNoteFragment extends DialogFragment {
     public void deleteNote(){
         Log.d(TAG, "deleteNote: "+position);
         wantToCloseDialog = true;
-        this.mListener.onDelete(position);
+        this.mListener.onDeleteNote(position);
 
 
     }

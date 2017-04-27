@@ -2,7 +2,7 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="45dp"
     android:orientation="vertical">
 
     <TableRow
@@ -12,11 +12,12 @@
         <TextView
             android:id="@+id/projectName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:height="35dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
+            android:height="45dp"
+            android:gravity="bottom"
             android:text="Project Name"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="#000000"

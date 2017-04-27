@@ -21,6 +21,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Bryan\.android\build-cache\f22747e65e14b670e0bc2d3b04e40d838ab4966b\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f40cf334cdc8b098b74312e21c7741c6eefbeb0e">
+        <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\pre-dexed\debug\classes_86332a8578d3079ac64d49c3272e0b1d969f8012.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Bryan\.android\build-cache\98d0a648f75a0a9e8179b2241bad2845056131bd\output\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -250,7 +259,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="999026585afde887bb708d97f165a529dbcdea87">
+        sha1="ef401106a5aa72c1fa943c37233bf3cf489e03f2">
         <dex dex="C:\Users\Bryan\Desktop\CMTAAndroid\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_76c673b30dc2b13cfd3d9cc4659712c453dff0c5\classes.dex" />
     </item>
     <item

@@ -29,6 +29,12 @@ public class Issue implements Parcelable {
         this.image=image;
 
     }
+    public Issue(String location, String status, String details, String report) {
+        this.status = status;
+        this.details = details;
+        this.report = report;
+        this.location = location;
+    }
     public Issue(String location, String status, String details, String report, byte[] data,String image, BitmapDrawable bitmapDrawable, Bitmap bmap) {
         this.status = status;
         this.details = details;

@@ -46,18 +46,12 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
     FragmentManager fm = getSupportFragmentManager();
     public ListView mListView;
     public Project myProject;
-    public ArrayList<Report> reportList = new ArrayList<>();
     public ReportFragment reportFragment;
     final Context context = this;
     private String projectKey;
     FirebaseListAdapter mAdapter;
-    List<String> notes;
-    public ArrayList<String> reportKeys = new ArrayList<>();
 
-
-    DatabaseReference projectRef = FirebaseDatabase.getInstance().getReference().child("projects");
     DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference().child("reports");
-    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     //File deletion stuff
     static final String appDirectoryName = "Issue_Images";
@@ -70,57 +64,7 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
         setContentView(R.layout.activity_report_view);
         projectKey = this.getIntent().getExtras().getString("key");
         Log.d("projectkey",projectKey);
-        projectRef.child(projectKey).child("reports").orderByKey().addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot != null && dataSnapshot.getValue() != null) {
 
-                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                        //Pulling the project keys and creating a hashmap of the project data
-                        String key = (String) snap.getValue();
-                        //converting the hashmap data into a project object
-                        //utilizing the project objects and key data
-                        if(reportKeys.contains(key)){
-                            Log.d("REPORTS", "key already added");
-                        }else{
-                            reportKeys.add(key);
-                            Log.d("REPORTS", key);
-
-                        }
-                    }
-                }
-            }
-            public void onCancelled (DatabaseError firebaseError){
-                //doing nothing for now // TODO: 3/27/2017 Add Error Handling
-            }
-        });
-        Query reportQuery = reportRef.orderByChild("project").equalTo(projectKey);
-        reportQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot != null && dataSnapshot.getValue() != null) {
-
-                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                        //Pulling the project keys and creating a hashmap of the project data
-                        String key = snap.getKey();
-                        HashMap<String,String> reportMap = (HashMap<String,String>) snap.getValue();
-                        //converting the hashmap data into a project object
-                        String preparedBy = reportMap.get("preparedBy");
-                        String project = reportMap.get("project");
-                        String punchListType = reportMap.get("punchListType");
-                        String siteVisitDate = reportMap.get("siteVisitDate");
-                        Report saveReport = new Report(preparedBy,project,punchListType,siteVisitDate,notes);
-                        //utilizing the project objects and key data
-                        reportList.add(saveReport);
-                        Log.d("MAIN", key);
-                        Log.d("MAIN","report added with details "+preparedBy + " " + project+ " " + punchListType + " "+siteVisitDate);
-                    }
-                }
-            }
-            public void onCancelled (DatabaseError firebaseError){
-                //doing nothing for now // TODO: 3/27/2017 Add Error Handling
-            }
-        });
         //Setting up Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
@@ -145,8 +89,7 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    DatabaseReference mRef = mAdapter.getRef(position);
+                DatabaseReference mRef = mAdapter.getRef(position);
                     final String majorKey = mRef.getKey();
                     final int testPosition = position;
                     final HashMap<String,String> reportMap = new HashMap<String, String>();
@@ -165,12 +108,6 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
                                         reportMap.put(postSnapshot.getKey(), (String) postSnapshot.getValue());
                                         Log.d("Report", key);
                                         Log.d("Report", value);}
-
-                                    //converting the hashmap data into a project object
-
-                                    //utilizing the project objects and key data
-
-
                                 }
                             }
                             String project = reportMap.get("project");
@@ -188,6 +125,7 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
                             Intent detailIntent = new Intent(context, IssueView.class);
                             detailIntent.putExtras(args);
                             startActivity(detailIntent);
+                            finish();
 
                         }
                         public void onCancelled (DatabaseError firebaseError){
@@ -213,7 +151,7 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
                         if (dataSnapshot != null && dataSnapshot.getValue() != null) {
 
                             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                //Pulling the project keys and creating a hashmap of the project data
+                                //Pulling the Report keys and values
                                 String key =(String)postSnapshot.getKey();
                                 if (postSnapshot.getKey().equals("notes")) {
 
@@ -289,8 +227,6 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
 
     public void onComplete(Report newReport) {
         String reportAutoID = reportRef.push().getKey();
-        reportList.add(newReport);
-        int position = reportList.indexOf(newReport);
         mAdapter.notifyDataSetChanged();
         reportRef.child(reportAutoID).child("preparedBy").setValue(newReport.getPreparedBy());
         reportRef.child(reportAutoID).child("project").setValue(newReport.getProject());
@@ -300,10 +236,10 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
         Bundle args = new Bundle();
         args.putString("key",reportAutoID);
         args.putParcelable("report_parcel",newReport);
-        args.putInt("position",position);
         Intent detailIntent = new Intent(context, IssueView.class);
         detailIntent.putExtras(args);
         startActivity(detailIntent);
+        finish();
     }
     public void onEdit(Report editReport, int position){
         DatabaseReference itemRef = mAdapter.getRef(position);
@@ -312,7 +248,6 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
         itemRef.child("siteVisitDate").setValue(editReport.getSiteVisitDate());
         itemRef.child("notes").setValue(editReport.getNotes());
         mAdapter.notifyDataSetChanged();
-        reportList.set(position,editReport);
     }
 
 
@@ -332,19 +267,6 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
                         //Pulling the project keys and creating a hashmap of the project data
                         String key = postSnapshot.getKey();
                         postSnapshot.getRef().removeValue();
-                        StorageReference deleteRef = storage.getReference().child("images/" + key);
-                        deleteRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                // File deleted successfully
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Uh-oh, an error occurred!
-                            }
-
-                        });
                         String filename = key + ".png";
                         File dir = new File(imageRoot);
                         dir.mkdirs();
@@ -395,5 +317,14 @@ public class ReportView extends AppCompatActivity implements ReportFragment.OnCo
             e.printStackTrace();
         }
     }
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAdapter.cleanup();
+    }
 }

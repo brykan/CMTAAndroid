@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -42,112 +41,52 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by Bryan on 3/6/17.
  */
 
-public class IssueView extends AppCompatActivity implements IssueFragment.OnCompleteListener,EditIssueFragment.OnCompleteListener,ReportRequest.OnCompleteListener {
+public class IssueView extends AppCompatActivity implements IssueFragment.OnCompleteListener,EditIssueFragment.OnCompleteListener,ReportRequest.OnCompleteListener, View.OnClickListener{
 
     private static final String TAG = "IssueView";
 
     final Context context = this;
 
-    FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef;
     //Fragment items
     FragmentManager fm = getSupportFragmentManager();
     public IssueFragment issueFragment;
 
     //Various List items
     public ListView mListView;
-    public ArrayList<Issue> issueList = new ArrayList<>();
     public Report myReport;
-    public int position;
     FirebaseListAdapter mAdapter;
     private FloatingActionButton fab;
-
     //Database References
-    DatabaseReference reportRef = FirebaseDatabase.getInstance().getReference().child("reports");
-    DatabaseReference issueRef = FirebaseDatabase.getInstance().getReference().child("issues");
 
     //Various Keys
     public String reportAutoID;
-    ArrayList<String> imageKeys = new ArrayList<>();
-    ArrayList<String> issueKeys = new ArrayList<>();
-
-    //Image Data
-    final long THREE_MEGABYTES = 1024*1024*3;
 
     public byte[] imageData;
     public BitmapDrawable bdrawable;
     static final String appDirectoryName = "Issue_Images";
     static final String imageRoot = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString()+"/"+appDirectoryName;
-    public void encodeBitmap(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,25,baos);
-        imageData = baos.toByteArray();
-    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_issue_view);
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        storageRef = storage.getReferenceFromUrl("gs://cmta-8ecda.appspot.com/");
         //pulling issue data if need be
         reportAutoID = this.getIntent().getExtras().getString("key");
-        Query issueQuery = issueRef.orderByChild("report").equalTo(reportAutoID);
-        issueQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot != null && dataSnapshot.getValue() != null) {
+        Query issueQuery = FirebaseDatabase.getInstance().getReference().child("issues").orderByChild("report").equalTo(reportAutoID);
 
-                    for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                        //Pulling the project keys and creating a hashmap of the project data
-                        String key = snap.getKey();
-                        issueKeys.add(key);
-                        HashMap<String, String> issueMap = (HashMap<String, String>) snap.getValue();
-                        //converting the hashmap data into a project object
-                        final String issueLocation = issueMap.get("location");
-                        final String issueStatus = issueMap.get("status");
-                        final String issueDetails = issueMap.get("details");
-                        final String saveKey = issueMap.get("report");
-                        imageData = getImage(key);
-                        File imgFile = new File(imageRoot, key + ".png");
-                        Log.d(TAG, "onDataChange: "+imageData.length);
-                        if (imgFile.exists()) {
-//                            BitmapFactory.Options options = new BitmapFactory.Options();
-//                            options.inSampleSize = 4;
-                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-//                            encodeBitmap(myBitmap);
-//                            final int THUMBSIZE = 256;
-//                            Bitmap thumbImage = ThumbnailUtils.extractThumbnail(myBitmap,THUMBSIZE,THUMBSIZE);
-                            bdrawable = new BitmapDrawable(getResources(), myBitmap);
-                            Issue saveIssue = new Issue(issueLocation, issueStatus, issueDetails, saveKey, imageData,imageData.toString(), bdrawable, myBitmap);
-                            Log.d(TAG, "onDataChange: "+saveIssue.toString());
-                            //utilizing the project objects and key data
-                            issueList.add(saveIssue);
-                        }
-                        imageKeys.add(key);
-                        Log.d("MAIN", key);
-                        Log.d("MAIN", "issue added with location " + issueLocation + " status " + issueStatus + " details " + issueDetails);
-                    }
-                }
-            }
-            public void onCancelled (DatabaseError firebaseError){
-                //doing nothing for now // TODO: 3/27/2017 Add Error Handling
-            }
-        });
         //Setting up the Toolbar
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar1);
@@ -156,20 +95,12 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle("Issues");
         // Get report data passed from previous activity
-        position = this.getIntent().getExtras().getInt("position");
+       // position = this.getIntent().getExtras().getInt("position");
         myReport = this.getIntent().getExtras().getParcelable("report_parcel");
         //Setting up listView and firebaseadapter
         final ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
-        fab = (FloatingActionButton) findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                openRequest();
-
-            }
-        });
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(this);
         mAdapter = new FirebaseListAdapter<Issue>(this, Issue.class, R.layout.issuelistrow, issueQuery) {
             @Override
             protected void populateView(View view, Issue issue, int position) {
@@ -201,29 +132,62 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Issue selectedIssue = issueList.get(position);
-                Bundle args = new Bundle();
-                args.putParcelable("issue_parcel",selectedIssue);
-                args.putInt("position",position);
-                args.putByteArray("image",selectedIssue.getData());
-                args.putString("key",mAdapter.getRef(position).getKey());
-                EditIssueFragment editFragment = new EditIssueFragment();
-                editFragment.setArguments(args);
-                editFragment.show(fm, "Android Dialog");
+                final DatabaseReference mRef = mAdapter.getRef(position);
+                final HashMap<String,String> issueMap = new HashMap<String, String>();
+                final int selectedPosition = position;
+                mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot != null && dataSnapshot.getValue() != null) {
+
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                //Pulling the project keys and creating a hashmap of the project data
+
+                                String key =(String)postSnapshot.getKey();
+                                if(!postSnapshot.getKey().equals("image")) {
+                                    String value = (String) postSnapshot.getValue();
+                                    issueMap.put(key, value);
+                                    Log.d("Report", key);
+                                    Log.d("Report", value);
+                                }
+                            }
+                        }
+                        String image = issueMap.get("image");
+                        String location = issueMap.get("location");
+                        String details = issueMap.get("details");
+                        String status = issueMap.get("status");
+                        String report = issueMap.get("report");
+                        Issue selectedIssue = new Issue(location,status,details,report);
+                        Bundle args = new Bundle();
+                        args.putParcelable("issue_parcel",selectedIssue);
+                        args.putInt("position",selectedPosition);
+                        args.putByteArray("image",image.getBytes());
+                        args.putString("key",mRef.getKey());
+                        EditIssueFragment editFragment = new EditIssueFragment();
+                        editFragment.setArguments(args);
+                        editFragment.show(fm, "Android Dialog");
+                    }
+                    public void onCancelled (DatabaseError firebaseError){
+                        //doing nothing for now // TODO: 3/27/2017 Add Error Handling
+                    }
+
+                });
+
+
                 return true;
             }
         });
 
     }
 
-    public void openRequest(){
+    public void addIssue(){
         Bundle args = new Bundle();
-        args.putString("key", reportAutoID);
-        ReportRequest request = new ReportRequest();
-        request.setArguments(args);
+        args.putString("report_name", reportAutoID);
+        issueFragment = new IssueFragment();
+        issueFragment.setArguments(args);
 
         // Show Alert DialogFragment
-        request.show(fm, "Android Dialog");
+        issueFragment.show(fm, "Android Dialog");
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -240,14 +204,14 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.add_issue) {
+        if (id == R.id.export_report) {
             Bundle args = new Bundle();
-            args.putString("report_name", reportAutoID);
-            issueFragment = new IssueFragment();
-            issueFragment.setArguments(args);
+            args.putString("key", reportAutoID);
+            ReportRequest reportRequest = new ReportRequest();
+            reportRequest.setArguments(args);
 
             // Show Alert DialogFragment
-            issueFragment.show(fm, "Android Dialog");
+            reportRequest.show(fm, "Android Dialog");
 
             return true;
         }
@@ -256,9 +220,8 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
     }
 
     public void onComplete(Issue newIssue) {
-        issueList.add(newIssue);
+        DatabaseReference issueRef = FirebaseDatabase.getInstance().getReference().child("issues");
         String issueAutoID = issueRef.push().getKey();
-        issueKeys.add(issueAutoID);
         issueRef.child(issueAutoID).child("details").setValue(newIssue.getDetails());
         issueRef.child(issueAutoID).child("location").setValue(newIssue.getLocation());
         issueRef.child(issueAutoID).child("status").setValue(newIssue.getStatus());
@@ -268,35 +231,38 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
         write(newImage,issueAutoID,newIssue);
         mAdapter.notifyDataSetChanged();
     }
+    public void onInComplete(Issue newIssue){
+        DatabaseReference issueRef = FirebaseDatabase.getInstance().getReference().child("issues");
+        String issueAutoID = issueRef.push().getKey();
+        issueRef.child(issueAutoID).child("details").setValue(newIssue.getDetails());
+        issueRef.child(issueAutoID).child("location").setValue(newIssue.getLocation());
+        issueRef.child(issueAutoID).child("status").setValue(newIssue.getStatus());
+        issueRef.child(issueAutoID).child("report").setValue(reportAutoID);
+        mAdapter.notifyDataSetChanged();
+    }
     public void onEdit(Issue editIssue, int position){
         DatabaseReference itemRef = mAdapter.getRef(position);
         itemRef.child("status").setValue(editIssue.getStatus());
         itemRef.child("location").setValue(editIssue.getLocation());
         itemRef.child("details").setValue(editIssue.getDetails());
+        itemRef.child("image").setValue(editIssue.getData());
         write(editIssue.getBmap(),itemRef.getKey(),editIssue);
         mAdapter.notifyDataSetChanged();
-        issueList.set(position,editIssue);
+    }
+    public void onIncompleteEdit(Issue editIssue, int position){
+        DatabaseReference itemRef = mAdapter.getRef(position);
+        itemRef.child("status").setValue(editIssue.getStatus());
+        itemRef.child("location").setValue(editIssue.getLocation());
+        itemRef.child("details").setValue(editIssue.getDetails());
+        mAdapter.notifyDataSetChanged();
     }
     public void onDelete(int position){
         final String TAG = "DELETION";
-        issueKeys.remove(position);
-        issueList.remove(position);
+//        issueKeys.remove(position);
+        //issueList.remove(position);
         DatabaseReference itemRef = mAdapter.getRef(position);
         Log.d(TAG, "onDelete: "+position);
         String deleteKey = itemRef.getKey();
-        StorageReference deleteRef = storage.getReference().child("images/" + deleteKey);
-        deleteRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                // File deleted successfully
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Uh-oh, an error occurred!
-                            }
-
-                        });
                         String filename = deleteKey + ".png";
                         File dir = new File(imageRoot);
                         dir.mkdirs();
@@ -436,5 +402,24 @@ public class IssueView extends AppCompatActivity implements IssueFragment.OnComp
         });
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.fab)
+        {
+                addIssue();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAdapter.cleanup();
     }
 }

@@ -1,40 +1,38 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="5dp"
     android:scrollbars="vertical"
-    android:weightSum="1">
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:focusableInTouchMode="true">
 
     <EditText
         android:id="@+id/editPreparedBy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:hint="Prepared By"
         android:inputType="text" />
 
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/editPreparedBy"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="0.05"
+        android:layout_gravity="center_vertical|end"
+        android:layout_weight="1"
+        android:gravity="end"
         android:visibility="visible" />
 
     <EditText
         android:id="@+id/editSiteVisitDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:focusableInTouchMode="false"
         android:hint="Visit Date"
         android:inputType="none" />
@@ -64,9 +62,10 @@
     <ListView
         android:id="@+id/noteslistview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         android:layout_weight=".1"
         android:animateLayoutChanges="true" />
 
 
 </LinearLayout>
+</ScrollView>

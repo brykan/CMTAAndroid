@@ -86,6 +86,8 @@ public class EditProjectFragment extends DialogFragment {
         final AlertDialog d = (AlertDialog)getDialog();
         if(d != null)
         {
+            d.setCanceledOnTouchOutside(false);
+
             Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(new View.OnClickListener()
             {

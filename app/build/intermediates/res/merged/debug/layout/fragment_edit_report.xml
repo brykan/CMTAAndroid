@@ -1,16 +1,20 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="5dp"
     android:weightSum="1">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight=".45"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <TextView
@@ -44,40 +48,33 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight=".35"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:scrollbars="vertical"
+        android:weightSum="1"
+        android:focusableInTouchMode="true">
 
         <EditText
-            android:id="@+id/editPreparedBy1"
+            android:id="@+id/editPreparedBy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_weight="0"
             android:hint="Prepared By"
             android:inputType="text" />
 
         <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/editPreparedBy"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0"
+            android:layout_gravity="center_vertical|end"
+            android:layout_weight="1"
+            android:gravity="end"
             android:visibility="visible" />
 
         <EditText
-            android:id="@+id/editSiteVisitDate1"
+            android:id="@+id/editSiteVisitDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_weight="0"
             android:focusableInTouchMode="false"
             android:hint="Visit Date"
             android:inputType="none" />
@@ -93,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="Notes"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                android:textAppearance="@android:style/TextAppearance.Material.Headline" />
 
             <Button
                 android:id="@+id/addButton"
@@ -104,23 +101,16 @@
 
         </LinearLayout>
 
+        <ListView
+            android:id="@+id/noteslistview"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_weight=".1"
+            android:animateLayoutChanges="true" />
+
+
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/noteslistview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0"
-        android:clipToPadding="false" />
-
-    <TextView
-        android:id="@+id/emptyListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight=".9"
-        android:text="No Notes"
-        android:visibility="gone" />
 
 
 </LinearLayout>
+</ScrollView>

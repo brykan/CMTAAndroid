@@ -1,11 +1,11 @@
 [
     {
-        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
-        "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
-    },
-    {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\drawable-xhdpi-v4\\abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\drawable-xhdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
     },
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png",
@@ -14,6 +14,10 @@
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\drawable-xhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\fab_bg_mini.png",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\f22747e65e14b670e0bc2d3b04e40d838ab4966b\\output\\res\\drawable-xhdpi-v4\\fab_bg_mini.png"
     },
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
@@ -50,6 +54,10 @@
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\fab_bg_normal.png",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\f22747e65e14b670e0bc2d3b04e40d838ab4966b\\output\\res\\drawable-xhdpi-v4\\fab_bg_normal.png"
     },
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\design_ic_visibility_off.png",

@@ -3,5 +3,10 @@
     <color name="colorPrimary">#008852</color>
     <color name="colorPrimaryDark">#008852</color>
     <color name="colorAccent">#008852</color>
+    <color name="colorAccentPressed">#04673f</color>
     <color name="colorBackground">#ffffff</color>
+    <color name="white">#fafafa</color>
+    <color name="white_pressed">#f1f1f1</color>
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="half_black">#808080</color>
 </resources>

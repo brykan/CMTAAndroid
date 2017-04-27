@@ -144,10 +144,10 @@ public class EditReportFragment extends DialogFragment implements OnItemSelected
                 });
 
         //Initializing the Items from above to casts of the cooresponding views in the fragment
-        editPreparedBy = (EditText) view.findViewById(R.id.editPreparedBy1);
+        editPreparedBy = (EditText) view.findViewById(R.id.editPreparedBy);
         editPreparedBy.setText(myReport.getPreparedBy());
-        editReportPunchListType = (Spinner) view.findViewById(R.id.spinner1);
-        editSiteVisitDate = (EditText) view.findViewById(R.id.editSiteVisitDate1);
+        editReportPunchListType = (Spinner) view.findViewById(R.id.spinner);
+        editSiteVisitDate = (EditText) view.findViewById(R.id.editSiteVisitDate);
         editSiteVisitDate.setText(myReport.getSiteVisitDate());
         editReportPunchListType.setOnItemSelectedListener(this);
         editSiteVisitDate.setOnClickListener(new View.OnClickListener() {
@@ -226,6 +226,8 @@ public class EditReportFragment extends DialogFragment implements OnItemSelected
         final AlertDialog d = (AlertDialog)getDialog();
         if(d != null)
         {
+            d.setCanceledOnTouchOutside(false);
+
             Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
             positiveButton.setOnClickListener(new View.OnClickListener()
             {
@@ -239,9 +241,9 @@ public class EditReportFragment extends DialogFragment implements OnItemSelected
                 }
             });
 
-                int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.90);
-                int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
-                d.getWindow().setLayout(width, height);
+//                int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.90);
+//                int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
+//                d.getWindow().setLayout(width, height);
         }
     }
 
@@ -251,7 +253,7 @@ public class EditReportFragment extends DialogFragment implements OnItemSelected
         mAdapter.notifyDataSetChanged();
     }
     @Override
-    public void onDelete(int position){
+    public void onDeleteNote(int position){
         notesList.remove(position);
         mAdapter.notifyDataSetChanged();
     }

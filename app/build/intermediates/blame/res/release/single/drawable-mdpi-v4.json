@@ -144,6 +144,10 @@
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\drawable-mdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\fab_bg_mini.png",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\f22747e65e14b670e0bc2d3b04e40d838ab4966b\\output\\res\\drawable-mdpi-v4\\fab_bg_mini.png"
+    },
+    {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\drawable-mdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png"
     },
@@ -170,6 +174,10 @@
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\abc_ic_star_half_black_16dp.png",
         "source": "C:\\Users\\Bryan\\.android\\build-cache\\2959b28c4280a4f795a16b19bc4b22cc93f0a8a7\\output\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_16dp.png"
+    },
+    {
+        "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\fab_bg_normal.png",
+        "source": "C:\\Users\\Bryan\\.android\\build-cache\\f22747e65e14b670e0bc2d3b04e40d838ab4966b\\output\\res\\drawable-mdpi-v4\\fab_bg_normal.png"
     },
     {
         "merged": "C:\\Users\\Bryan\\Desktop\\CMTAAndroid\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4\\notify_panel_notification_icon_bg.png",
